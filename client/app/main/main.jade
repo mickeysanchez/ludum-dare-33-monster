@@ -1,6 +1,7 @@
 div.game(ng-controller="MainCtrl")
 
   div.board
-    div.square(ng-repeat="i in grid track by $index" ng-click="grid[$index].selected = true" ng-class="{selected: grid[$index].selected == true}")
+    div.row(ng-repeat="row in grid track by $index" ng-style="{height: calcPercent + '%'}")
+      div.square(ng-repeat="square in grid[$index] track by $index" ng-click="select(square)" ng-class="{selected: square.is_selected == true}" ng-style="square.style")
 
 

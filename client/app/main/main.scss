@@ -1,19 +1,22 @@
 .board {
-  background: black;
-  border: 1px solid red;
+  border: 3px solid black;
   height: 500px;
   width: 500px;
 
-  .square {
+  .row {
     display: inline-block;
-    box-sizing: border-box;
-    border: 1px solid white;
-    height: 5%;
-    width: 5%;
-    vertical-align: bottom;
+    width: 100%;
 
-    &.selected {
-      border: 3px solid green;
+    .square {
+      display: inline-block;
+      box-sizing: border-box;
+      border: 1px solid rgba(0,0,0,.05);
+      height: 100%;
+      vertical-align: bottom;
+
+      &.selected {
+        border: 3px solid green;
+      }
     }
   }
 }
