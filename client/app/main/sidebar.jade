@@ -1,0 +1,25 @@
+div.sidebar
+    div.player-stats
+      p.day Day: {{ player.day }}
+      p.money Cash: ${{ player.money }}
+      p.heat Heat: {{ player.heat }}
+
+    div.selected-stats(ng-if="selected")
+      h3.red(ng-if="selected.robbed") ROBBED
+      h3 Property Info:
+      div.stats
+        div.type
+          p.label Type:
+          p.stat {{ selected.type }}
+        div.residents(ng-if="selected.type != 'Road'")
+          p.label Residents:
+          p.stat {{ selected.info.name }}
+        div.percentage(ng-if="selected.type != 'Road'")
+          p.label Chance for success:
+          p.stat {{ selected.baseSuccessPercentage | rounded }}%
+        div.payoff(ng-if="selected.type != 'Road'")
+          p.label Possible Payoff:
+          p.stat ${{ selected.maximumPayoff }}
+
+      div.actions
+        md-button.md-primary.md-raised(ng-if="selected.type != 'Road'" type="button" ng-click="startRobbing()") Rob this property

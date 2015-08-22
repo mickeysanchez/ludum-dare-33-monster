@@ -1,0 +1,7 @@
+div.board
+    div.row(ng-repeat="row in grid track by $index")
+      div.square(ng-repeat="square in grid[$index] track by $index" ng-click="select(square)" ng-class="{selected: square == selected, residential: square.type == 'Residential', commercial: square.type == 'Commercial', road: square.type == 'Road', robbed: square.robbed}")
+
+        div.colorer(ng-style="{opacity: calcOpacity(square)}")
+
+        div.selector

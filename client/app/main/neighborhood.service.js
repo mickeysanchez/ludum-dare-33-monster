@@ -1,20 +1,20 @@
 angular.module('monsterApp')
   .factory('GridMaker', function() {
+
+    var grid = [];
+
     function createSquare(x, y) {
       var type = createType(x, y);
       var name = createName(type);
       var maximumPayoff = determineMaxPayoff(type, x, y);
       var baseSuccessPercentage = determineSuccessPercentage(type, maximumPayoff, x, y);
-      var opacity = determineOpacity(type, maximumPayoff)
 
       return {
+        x: x,
+        y: y,
         type: type,
         baseSuccessPercentage: baseSuccessPercentage,
         maximumPayoff: maximumPayoff,
-        style: {
-          // width: $scope.calcPercent + "%",
-          // opacity: opacity
-        },
         info: {
           name: name
         }
@@ -22,18 +22,28 @@ angular.module('monsterApp')
     }
 
     function createType(x, y) {
+      var surrounding = getSurrounding(x, y)
       var squareTypes = ["Residential", "Commercial", "Road"];
       type = "Residential";
       type = (_.random(0, 100) < 25) ? "Commercial" : type;
-      type = (_.random(0, 100) < 50) ? "Road" : type;
+      if (x % 3 == 0 || y % 5 == 0) type = "Road";
+      // type = (_.random(0, 100) < 50) ? "Road" : type;
       return type;
+    }
+
+    function getSurrounding(x, y) {
+
+
+      return {
+        topLeft: "ya"
+      }
     }
 
     function createName(type) {
       if (type == "Residential") {
         return chance.last() + " Family"
       } else if (type == "Commercial") {
-        var businessTypes = ["Convenience Store", "Gas Station", "Shoes", "Clothing", "Pawn Shop"]
+        var businessTypes = ["Convenience Store", "Gas Station", "Shoes", "Clothing", "Pawn Shop", "Grocery"]
         return chance.capitalize(chance.word()) + " " + _.sample(businessTypes);
       } else {
         return ""
@@ -60,16 +70,7 @@ angular.module('monsterApp')
       }
     }
 
-    function determineOpacity(type, payoff) {
-      if (type == "Road") {
-        return 1
-      } else {
-        return payoff / MAX_POSSIBLE_PAYOFF;
-      }
-    }
-
     var newGrid = function(numSquares) {
-      var grid = [];
       for (var i = 0; i < numSquares; i++) {
         var row = []
         for (var j = 0; j < numSquares; j++) {
