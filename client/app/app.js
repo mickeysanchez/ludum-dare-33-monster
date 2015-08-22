@@ -1,13 +1,14 @@
 'use strict';
 
 angular.module('monsterApp', [
-  'ngCookies',
-  'ngResource',
-  'ngSanitize',
-  'btford.socket-io',
-  'ui.router'
-])
-  .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+    'ngCookies',
+    'ngResource',
+    'ngSanitize',
+    'btford.socket-io',
+    'ui.router',
+    'ngMaterial'
+  ])
+  .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider
       .otherwise('/');
 

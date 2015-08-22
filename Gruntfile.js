@@ -1,11 +1,11 @@
 // Generated on 2015-08-22 using generator-angular-fullstack 2.1.0
 'use strict';
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
   var localConfig;
   try {
     localConfig = require('./server/config/local.env');
-  } catch(e) {
+  } catch (e) {
     localConfig = {};
   }
 
@@ -59,7 +59,8 @@ module.exports = function (grunt) {
           '<%= yeoman.client %>/{app,components}/**/*.js',
           '!<%= yeoman.client %>/{app,components}/**/*.spec.js',
           '!<%= yeoman.client %>/{app,components}/**/*.mock.js',
-          '!<%= yeoman.client %>/app/app.js'],
+          '!<%= yeoman.client %>/app/app.js'
+        ],
         tasks: ['injector:scripts']
       },
       injectCss: {
@@ -81,18 +82,21 @@ module.exports = function (grunt) {
       },
       injectSass: {
         files: [
-          '<%= yeoman.client %>/{app,components}/**/*.{scss,sass}'],
+          '<%= yeoman.client %>/{app,components}/**/*.{scss,sass}'
+        ],
         tasks: ['injector:sass']
       },
       sass: {
         files: [
-          '<%= yeoman.client %>/{app,components}/**/*.{scss,sass}'],
+          '<%= yeoman.client %>/{app,components}/**/*.{scss,sass}'
+        ],
         tasks: ['sass', 'autoprefixer']
       },
       jade: {
         files: [
           '<%= yeoman.client %>/{app,components}/*',
-          '<%= yeoman.client %>/{app,components}/**/*.jade'],
+          '<%= yeoman.client %>/{app,components}/**/*.jade'
+        ],
         tasks: ['jade']
       },
       gruntfile: {
@@ -102,9 +106,9 @@ module.exports = function (grunt) {
         files: [
           '{.tmp,<%= yeoman.client %>}/{app,components}/**/*.css',
           '{.tmp,<%= yeoman.client %>}/{app,components}/**/*.html',
-          
+
           '{.tmp,<%= yeoman.client %>}/{app,components}/**/*.js',
-          
+
           '!{.tmp,<%= yeoman.client %>}{app,components}/**/*.spec.js',
           '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js',
           '<%= yeoman.client %>/assets/images/{,*//*}*.{png,jpg,jpeg,gif,webp,svg}'
@@ -209,14 +213,14 @@ module.exports = function (grunt) {
           env: {
             PORT: process.env.PORT || 9000
           },
-          callback: function (nodemon) {
-            nodemon.on('log', function (event) {
+          callback: function(nodemon) {
+            nodemon.on('log', function(event) {
               console.log(event.colour);
             });
 
             // opens browser on initial server start
-            nodemon.on('config:update', function () {
-              setTimeout(function () {
+            nodemon.on('config:update', function() {
+              setTimeout(function() {
                 require('open')('http://localhost:8080/debug?port=5858');
               }, 500);
             });
@@ -230,7 +234,7 @@ module.exports = function (grunt) {
       target: {
         src: '<%= yeoman.client %>/index.html',
         ignorePath: '<%= yeoman.client %>/',
-        exclude: [/bootstrap-sass-official/, /bootstrap.js/, '/json3/', '/es5-shim/', /bootstrap.css/, /font-awesome.css/ ]
+        exclude: [/bootstrap-sass-official/, /bootstrap.js/, '/json3/', '/es5-shim/', /bootstrap.css/, /font-awesome.css/]
       }
     },
 
@@ -505,7 +509,7 @@ module.exports = function (grunt) {
           compass: false
         },
         files: {
-          '.tmp/app/app.css' : '<%= yeoman.client %>/app/app.scss'
+          '.tmp/app/app.css': '<%= yeoman.client %>/app/app.scss'
         }
       }
     },
@@ -527,15 +531,15 @@ module.exports = function (grunt) {
         },
         files: {
           '<%= yeoman.client %>/index.html': [
-               [
-                 
-                 '{.tmp,<%= yeoman.client %>}/{app,components}/**/*.js',
-                 
-                 '!{.tmp,<%= yeoman.client %>}/app/app.js',               
-                 '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.spec.js',
-                 '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js'               
-               ]
+            [
+
+              '{.tmp,<%= yeoman.client %>}/{app,components}/**/*.js',
+
+              '!{.tmp,<%= yeoman.client %>}/app/app.js',
+              '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.spec.js',
+              '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js'
             ]
+          ]
         }
       },
 
@@ -579,12 +583,12 @@ module.exports = function (grunt) {
   });
 
   // Used for delaying livereload until after server has restarted
-  grunt.registerTask('wait', function () {
+  grunt.registerTask('wait', function() {
     grunt.log.ok('Waiting for server reload...');
 
     var done = this.async();
 
-    setTimeout(function () {
+    setTimeout(function() {
       grunt.log.writeln('Done waiting!');
       done();
     }, 1500);
@@ -594,7 +598,7 @@ module.exports = function (grunt) {
     this.async();
   });
 
-  grunt.registerTask('serve', function (target) {
+  grunt.registerTask('serve', function(target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'env:all', 'env:prod', 'express:prod', 'wait', 'open', 'express-keepalive']);
     }
@@ -603,7 +607,7 @@ module.exports = function (grunt) {
       return grunt.task.run([
         'clean:server',
         'env:all',
-        'injector:sass', 
+        'injector:sass',
         'concurrent:server',
         'injector',
         'wiredep',
@@ -615,7 +619,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'env:all',
-      'injector:sass', 
+      'injector:sass',
       'concurrent:server',
       'injector',
       'wiredep',
@@ -627,7 +631,7 @@ module.exports = function (grunt) {
     ]);
   });
 
-  grunt.registerTask('server', function () {
+  grunt.registerTask('server', function() {
     grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
     grunt.task.run(['serve']);
   });
@@ -639,26 +643,22 @@ module.exports = function (grunt) {
         'env:test',
         'mochaTest'
       ]);
-    }
-
-    else if (target === 'client') {
+    } else if (target === 'client') {
       return grunt.task.run([
         'clean:server',
         'env:all',
-        'injector:sass', 
+        'injector:sass',
         'concurrent:test',
         'injector',
         'autoprefixer',
         'karma'
       ]);
-    }
-
-    else if (target === 'e2e') {
+    } else if (target === 'e2e') {
       return grunt.task.run([
         'clean:server',
         'env:all',
         'env:test',
-        'injector:sass', 
+        'injector:sass',
         'concurrent:test',
         'injector',
         'wiredep',
@@ -666,9 +666,7 @@ module.exports = function (grunt) {
         'express:dev',
         'protractor'
       ]);
-    }
-
-    else grunt.task.run([
+    } else grunt.task.run([
       'test:server',
       'test:client'
     ]);
@@ -676,7 +674,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'injector:sass', 
+    'injector:sass',
     'concurrent:dist',
     'injector',
     'wiredep',
@@ -694,7 +692,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('default', [
-    'newer:jshint',
+    //'newer:jshint',
     'test',
     'build'
   ]);

@@ -1,22 +1,53 @@
 div.game(ng-controller="MainCtrl")
+  div.robbing(ng-if="robbing")
+    div.white
+      div.violence
+        h3 How much violence will you use in this robbery?
+        <md-slider flex min="0" max="100" ng-model="player.violence" aria-label="">
+        </md-slider>
+        div.violence-num Violence: {{ player.violence }}%
+
+      div.stats
+        p.percentage Chance for success: {{ calcSuccessPercentage() | rounded }}%
+        p.payoff Maximum Possible Payoff: {{ selected.maximumPayoff }}
+
+      div.actions
+        md-button.md-primary(type="button" ng-click="cancelRob()") Cancel
+        md-button.md-primary.md-raised(ng-click="rob()") Rob
+
+  div.post-robbing(ng-if="postRobbing")
+    div.white
+      div(ng-if="lastRobbing.success")
+        h2 Success!
+        p You made away with ${{ lastRobbing.payoff }} worth of goods!
+
+        div.actions
+          md-button.md-primary.md-raised(type="button" ng-click="hidePostRobbing()") Ok
+
+      div(ng-if="!lastRobbing.success")
+        h2 Failure
+        p You got caught. Refresh browser to play again.
+        p Your score: {{ player.money }}
+
 
   div.board
     div.row(ng-repeat="row in grid track by $index")
-      div.square(ng-repeat="square in grid[$index] track by $index" ng-click="select(square)" ng-class="{selected: square == selected, residential: square.type == 'Residential', commericial: square.type == 'Commercial'}" ng-style="square.style")
+      div.square(ng-repeat="square in grid[$index] track by $index" ng-click="select(square)" ng-class="{selected: square == selected, residential: square.type == 'Residential', commercial: square.type == 'Commercial', road: square.type == 'Road'}" ng-style="square.style")
 
   div.info
     div.player-stats
+      p.day Day: {{ player.day }}
       p.money ${{ player.money }}
 
     div.selected-stats(ng-if="selected")
-      p.heading Stats:
+      h3 Info for selected:
       div.stats
         p.type Type: {{ selected.type }}
-        p.percentage Chance for success: {{ selected.baseSuccessPercentage | rounded }}%
-        p.payoff Max Payoff: ${{ selected.maximumPayoff }}
+        p.percentage(ng-if="selected.type != 'Road'") Chance for success: {{ selected.baseSuccessPercentage | rounded }}%
+        p.payoff(ng-if="selected.type != 'Road'") Maximum Possible Payoff: ${{ selected.maximumPayoff }}
 
       div.actions
-        button.rob(ng-click="rob()") Rob
+        md-button.md-primary.md-raised(ng-if="selected.type != 'Road'" type="button" ng-click="startRobbing()") Rob
 
 
 
