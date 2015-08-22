@@ -1,0 +1,21 @@
+.board {
+  background: black;
+  border: 1px solid red;
+  height: 500px;
+  width: 500px;
+
+  .square {
+    display: inline-block;
+    box-sizing: border-box;
+    border: 1px solid white;
+    height: 5%;
+    width: 5%;
+    vertical-align: bottom;
+
+    &.selected {
+      border: 3px solid green;
+    }
+  }
+}
+
+
