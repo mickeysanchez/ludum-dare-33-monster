@@ -2,7 +2,7 @@
 
 angular.module('monsterApp')
   .controller('MainCtrl', function($scope, $http, socket) {
-    $scope.numSquares = 10;
+    $scope.numSquares = 100;
     $scope.calcPercent = 100 / $scope.numSquares;
 
     $scope.player = {
@@ -24,7 +24,7 @@ angular.module('monsterApp')
         baseSuccessPercentage: baseSuccessPercentage,
         maximumPayoff: maximumPayoff,
         style: {
-          width: $scope.calcPercent + "%",
+          // width: $scope.calcPercent + "%",
           opacity: baseSuccessPercentage
         }
       }

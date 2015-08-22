@@ -1,24 +1,27 @@
 .game {
+  height: 100%;
 
   .board {
     display: inline-block;
-    border: 3px solid black;
-    height: 500px;
-    width: 500px;
+    height: 100%;
+    width: 75%;
+    overflow: scroll;
 
     .row {
       display: inline-block;
-      width: 100%;
+      height: 50px;
+      white-space: nowrap;
 
       .square {
         display: inline-block;
         box-sizing: border-box;
         border: 1px solid rgba(0,0,0,.05);
         height: 100%;
+        width: 50px;
         vertical-align: bottom;
 
         &.selected {
-          border: 3px solid green;
+          border: 5px solid green;
         }
 
         &.residential {
@@ -34,15 +37,18 @@
 
   .info {
     display: inline-block;
-    width: 300px;
-    height: 500px;
-    border: 3px solid black;
-    vertical-align: bottom;
+    width: 25%;
+    height: 100%;
+    box-sizing: border-box;
+    border-left: 3px solid black;
+    vertical-align: top;
 
     .player-stats {
       background: black;
       color: white;
       text-align: right;
+      padding: 10px;
+      font-size: 18px;
     }
 
     .selected-stats {

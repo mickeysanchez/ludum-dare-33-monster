@@ -1,7 +1,7 @@
 div.game(ng-controller="MainCtrl")
 
   div.board
-    div.row(ng-repeat="row in grid track by $index" ng-style="{height: calcPercent + '%'}")
+    div.row(ng-repeat="row in grid track by $index")
       div.square(ng-repeat="square in grid[$index] track by $index" ng-click="select(square)" ng-class="{selected: square == selected, residential: square.type == 'Residential', commericial: square.type == 'Commercial'}" ng-style="square.style")
 
   div.info
