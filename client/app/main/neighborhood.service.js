@@ -2,6 +2,7 @@ angular.module('monsterApp')
   .factory('GridMaker', function() {
     function createSquare(x, y) {
       var type = createType(x, y);
+      var name = createName(type);
       var maximumPayoff = determineMaxPayoff(type, x, y);
       var baseSuccessPercentage = determineSuccessPercentage(type, maximumPayoff, x, y);
       var opacity = determineOpacity(type, maximumPayoff)
@@ -13,6 +14,9 @@ angular.module('monsterApp')
         style: {
           // width: $scope.calcPercent + "%",
           // opacity: opacity
+        },
+        info: {
+          name: name
         }
       }
     }
@@ -21,8 +25,19 @@ angular.module('monsterApp')
       var squareTypes = ["Residential", "Commercial", "Road"];
       type = "Residential";
       type = (_.random(0, 100) < 25) ? "Commercial" : type;
-      // var type = _.sample(squareTypes);
+      type = (_.random(0, 100) < 50) ? "Road" : type;
       return type;
+    }
+
+    function createName(type) {
+      if (type == "Residential") {
+        return chance.last() + " Family"
+      } else if (type == "Commercial") {
+        var businessTypes = ["Convenience Store", "Gas Station", "Shoes", "Clothing", "Pawn Shop"]
+        return chance.capitalize(chance.word()) + " " + _.sample(businessTypes);
+      } else {
+        return ""
+      }
     }
 
     var MIN_POSSIBLE_PAYOFF = 0;

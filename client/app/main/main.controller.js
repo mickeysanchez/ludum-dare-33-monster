@@ -33,6 +33,7 @@ angular.module('monsterApp')
         $scope.lastRobbing.success = false;
       }
       $scope.robbing = false;
+      $scope.postRobbing = true;
     }
 
     $scope.determineSuccess = function() {

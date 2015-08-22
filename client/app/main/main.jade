@@ -43,6 +43,7 @@ div.game(ng-controller="MainCtrl")
       h3 Info for selected:
       div.stats
         p.type Type: {{ selected.type }}
+        p.residents Residents: {{ selected.info.name }}
         p.percentage(ng-if="selected.type != 'Road'") Chance for success: {{ selected.baseSuccessPercentage | rounded }}%
         p.payoff(ng-if="selected.type != 'Road'") Maximum Possible Payoff: ${{ selected.maximumPayoff }}
 

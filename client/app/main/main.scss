@@ -30,12 +30,12 @@
   .board {
     display: inline-block;
     height: 100%;
-    width: 75%;
+    width: 70%;
     overflow: scroll;
 
     .row {
       display: inline-block;
-      height: 50px;
+      height: 25px;
       white-space: nowrap;
 
       .square {
@@ -43,7 +43,7 @@
         box-sizing: border-box;
         border: 1px solid rgba(0,0,0,.05);
         height: 100%;
-        width: 50px;
+        width: 25px;
         vertical-align: bottom;
 
         &.selected {
@@ -67,7 +67,7 @@
 
   .info {
     display: inline-block;
-    width: 25%;
+    width: 30%;
     height: 100%;
     box-sizing: border-box;
     border-left: 3px solid black;
