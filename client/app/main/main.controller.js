@@ -5,22 +5,27 @@ angular.module('monsterApp')
     $scope.numSquares = 10;
     $scope.calcPercent = 100 / $scope.numSquares;
 
-    $scope.selected = {
-      is_selected: false
-    };
+    $scope.player = {
+      money: 0
+    }
 
     $scope.select = function(newlySelected) {
-      $scope.selected.is_selected = false;
-      newlySelected.is_selected = true;
       $scope.selected = newlySelected;
     }
 
     $scope.createSquare = function(x, y) {
+      var squareTypes = ["Residential", "Commercial"];
+      var type = _.sample(squareTypes);
+      var baseSuccessPercentage = _.random(.2, .9);
+      var maximumPayoff = _.random(100, 10000)
+
       return {
-        is_selected: false,
+        type: type,
+        baseSuccessPercentage: baseSuccessPercentage,
+        maximumPayoff: maximumPayoff,
         style: {
-          background: 'grey',
-          width: $scope.calcPercent + "%"
+          width: $scope.calcPercent + "%",
+          opacity: baseSuccessPercentage
         }
       }
     }
@@ -38,4 +43,8 @@ angular.module('monsterApp')
     }
 
     $scope.grid = $scope.newGrid();
+
+    $scope.rob = function() {
+      $scope.player.money += $scope.selected.maximumPayoff;
+    }
   });

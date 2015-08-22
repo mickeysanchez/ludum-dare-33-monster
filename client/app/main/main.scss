@@ -1,24 +1,59 @@
-.board {
-  border: 3px solid black;
-  height: 500px;
-  width: 500px;
+.game {
 
-  .row {
+  .board {
     display: inline-block;
-    width: 100%;
+    border: 3px solid black;
+    height: 500px;
+    width: 500px;
 
-    .square {
+    .row {
       display: inline-block;
-      box-sizing: border-box;
-      border: 1px solid rgba(0,0,0,.05);
-      height: 100%;
-      vertical-align: bottom;
+      width: 100%;
 
-      &.selected {
-        border: 3px solid green;
+      .square {
+        display: inline-block;
+        box-sizing: border-box;
+        border: 1px solid rgba(0,0,0,.05);
+        height: 100%;
+        vertical-align: bottom;
+
+        &.selected {
+          border: 3px solid green;
+        }
+
+        &.residential {
+          background: orange;
+        }
+
+        &.commericial {
+          background: blue;
+        }
       }
     }
   }
+
+  .info {
+    display: inline-block;
+    width: 300px;
+    height: 500px;
+    border: 3px solid black;
+    vertical-align: bottom;
+
+    .player-stats {
+      background: black;
+      color: white;
+      text-align: right;
+    }
+
+    .selected-stats {
+      margin-top: 10px;
+
+      p {
+        margin-bottom: 3px;
+      }
+    }
+  }
+
 }
 
 
