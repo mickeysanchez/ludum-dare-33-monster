@@ -66,11 +66,39 @@ angular.module('monsterApp')
         price: 1000
       }, {
         name: "Down payment on a house outside the city",
-        desc: "The only way to win the game.",
+        desc: "Change your surroundings. The only way to win the game.",
         successModifier: 0,
         violenceModifier: 0,
         capacityModifier: 0,
         price: 10000
+      }, {
+        name: "Ski Mask",
+        desc: "Conceal your identity.",
+        successModifier: 5,
+        violenceModifier: 0,
+        capacityModifier: 0,
+        price: 10
+      }, {
+        name: "Shotgun",
+        desc: "Easier to hit people. Harder to conceal. Really loud.",
+        successModifier: -10,
+        violenceModifier: 30,
+        capacityModifier: 0,
+        price: 350
+      }, {
+        name: "Car",
+        desc: "Stop relying on someone else to get around.",
+        successModifier: 15,
+        violenceModifier: 0,
+        capacityModifier: 50,
+        price: 3000
+      }, {
+        name: "Cocaine",
+        desc: "Get revved up.",
+        successModifier: 10,
+        violenceModifier: 10,
+        capacityModifier: 0,
+        price: 100
       }]
     }
   });

@@ -5,7 +5,7 @@ div.post-robbing(ng-if="postPostRobbing")
         p {{ lastRobbery.randomEvent.phrase }}, {{ lastRobbery.randomEvent.reason }}.
         p
           span You spend
-          span.money  ${{lastRobbery.randomEvent.randomCashSpend}}
+          span.money.negative  ${{lastRobbery.randomEvent.randomCashSpend}}
           span  {{ lastRobbery.randomEvent.spentOn }}.
 
         div.actions

@@ -2,7 +2,7 @@ div.post-robbing(ng-if="postRobbing")
     div.white
       div(ng-if="lastRobbery.success")
         h2(ng-if="lastRobbery.getawayMishap") Screwed.
-        h2(ng-if="!lastRobbery.getawayMishap") Success!
+        h2(ng-if="!lastRobbery.getawayMishap") Success:
         p(ng-if="!lastRobbery.getawayDriver")
           span You made away with
           span.money  ${{ lastRobbery.payoff }}
@@ -23,10 +23,8 @@ div.post-robbing(ng-if="postRobbing")
 
 
       div(ng-if="!lastRobbery.success")
-        h2 Failure
-        p You got caught.
-        p Refresh browser to play again.
-        p
-          span Your score:
-          span.money  ${{ player.money }}
-        p Too bad money doesn't count for anything in prison.
+        h2 You were caught:
+        p {{ lastRobbery.randomEvent.reason }}
+        div.actions
+          md-button.md-primary(type="button" ng-click="goToCourt(false)") Accept court appointed attourney
+          md-button.md-primary.md-raised.green-button(type="button" ng-click="goToCourt(true)") Hire a Lawyer - $500

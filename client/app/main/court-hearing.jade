@@ -1,0 +1,15 @@
+div.post-robbing(ng-if="courtHearing")
+    div.white
+      div(ng-if="lastRobbery.guilty") Guilty.
+        p They found you guilty on all counts.
+        p They send you to jail for
+          span  {{ lastRobbery.randomEvent.possibleJailtime }} years.
+
+        div.actions
+          md-button.md-primary.md-raised(type="button" ng-click="hideCourtHearing()") Ok
+
+      div(ng-if="!lastRobbery.guilty") Innocent.
+        p Somehow you got off the hook.
+
+        div.actions
+          md-button.md-primary.md-raised(type="button" ng-click="hideCourtHearing()") Ok

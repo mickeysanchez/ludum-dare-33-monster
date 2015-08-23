@@ -1,3 +1,6 @@
+var MIN_POSSIBLE_PAYOFF = 0;
+var MAX_POSSIBLE_PAYOFF = 1000;
+
 angular.module('monsterApp')
   .factory('GridMaker', function() {
 
@@ -50,9 +53,6 @@ angular.module('monsterApp')
       }
     }
 
-    var MIN_POSSIBLE_PAYOFF = 0;
-    var MAX_POSSIBLE_PAYOFF = 500;
-
     function determineMaxPayoff(type, x, y) {
       if (type == "Road") {
         return 0;
@@ -61,7 +61,7 @@ angular.module('monsterApp')
       }
     }
 
-    function determineSuccessPercentage(type, maximumPayoff, x, y) {
+    var determineSuccessPercentage = function determineSuccessPercentage(type, maximumPayoff, x, y) {
       if (type == "Road") {
         return 0;
       } else {
@@ -84,6 +84,7 @@ angular.module('monsterApp')
 
 
     return {
-      newGrid: newGrid
+      newGrid: newGrid,
+      determineSuccessPercentage: determineSuccessPercentage
     }
   })

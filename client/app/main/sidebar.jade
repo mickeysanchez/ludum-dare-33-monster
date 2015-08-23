@@ -2,7 +2,7 @@ div.sidebar
     div.player-stats
       p.money Cash: ${{ player.money }}
       p.day Night: {{ player.day }}
-      p.heat Heat: {{ player.heat }}
+      //- p.heat Heat: {{ player.heat }}
       p.items Items:
         span(ng-repeat="item in player.items track by $index")  -{{ item.name }}-
 
@@ -33,7 +33,16 @@ div.sidebar
         li(ng-repeat="item in items")
           p.bold {{ item.name }}
           p {{ item.desc }}
-          p.bold Success: +{{ item.successModifier }}
-          p.bold Violence: +{{ item.violenceModifier }}
-          p.bold Capacity: +{{ item.capacityModifier }}
+          p.bold
+            span Success:
+            span(ng-if="item.successModifier >= 0")  +
+            span  {{ item.successModifier }}
+          p.bold
+            span Violence:
+            span(ng-if="item.violenceModifier >= 0")  +
+            span  {{ item.violenceModifier }}
+          p.bold
+            span Capacity:
+            span(ng-if="item.capacityModifier >= 0")  +
+            span  {{ item.capacityModifier }}
           md-button.md-primary.md-raised.green-button(ng-click="player.buy(item)") BUY - ${{ item.price }}

@@ -13,12 +13,21 @@ angular.module('monsterApp')
         if (item.price <= self.money) {
           self.money -= item.price;
           self.items.push(item);
-          $mdDialog.show(
-            $mdDialog.alert()
-            .clickOutsideToClose(true)
-            .title('You aquired the ' + item.name + ".")
-            .ok('OK')
-          )
+          if (item.name != "Down payment on a house outside the city") {
+            $mdDialog.show(
+              $mdDialog.alert()
+              .clickOutsideToClose(true)
+              .title('You aquired the ' + item.name + ".")
+              .ok('OK')
+            )
+          } else {
+            $mdDialog.show(
+              $mdDialog.alert()
+              .clickOutsideToClose(true)
+              .title('You won the game, but since this version of the game was made in 48 hours for Ludum Dare, all you get is this pop up. If you want to play again, refresh dat browser!')
+              .ok('OK')
+            )
+          }
         } else {
           $mdDialog.show(
             $mdDialog.alert()
