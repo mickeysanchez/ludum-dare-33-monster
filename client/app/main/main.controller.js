@@ -98,14 +98,31 @@ angular.module('monsterApp')
       return randPercent < $scope.calcSuccessPercentage();
     }
 
+    $scope.itemSuccess = function() {
+      var success = 0;
+      _.each($scope.player.items, function(item) {
+        success += item.successModifier;
+      })
+      var successPercent = success / 100;
+      return successPercent;
+    }
+
     $scope.calcSuccessPercentage = function() {
       var violencePercent = ($scope.player.violence / 100);
-      return $scope.selected.baseSuccessPercentage * violencePercent;
+
+      var successPercent = $scope.selected.baseSuccessPercentage + $scope.itemSuccess();
+
+      return (successPercent / 2) + (violencePercent * (successPercent / 2));
     }
 
     $scope.calcPayoff = function() {
+      var capacity = 0;
+      _.each($scope.player.items, function(item) {
+        capacity += item.capacityModifier;
+      })
+      var capacityPercent = capacity / 100;
       var payoff = 0;
-      var randPercent = _.random(.5, 1.0);
+      var randPercent = _.random(.5 + capacityPercent, 1.0);
       payoff = Math.round($scope.selected.maximumPayoff * randPercent);
       $scope.lastRobbery.payoff = payoff;
       return payoff;
@@ -114,6 +131,14 @@ angular.module('monsterApp')
     $scope.calcHeat = function() {
       var violencePercent = ($scope.player.violence / 100);
       return violencePercent * 100;
+    }
+
+    $scope.calcTotalViolence = function() {
+      var v = 100;
+      _.each($scope.player.items, function(item) {
+        v += item.violenceModifier;
+      })
+      return v;
     }
 
     $scope.calcOpacity = function(square) {

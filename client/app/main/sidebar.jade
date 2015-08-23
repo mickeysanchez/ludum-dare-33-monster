@@ -19,7 +19,7 @@ div.sidebar
           p.stat {{ selected.info.name }}
         div.percentage(ng-class="{'vis-hidden': selected.type == 'Road'}")
           p.label Chance for success:
-          p.stat {{ selected.baseSuccessPercentage | rounded }}%
+          p.stat {{ selected.baseSuccessPercentage + itemSuccess() | rounded }}%
         div.payoff(ng-class="{'vis-hidden': selected.type == 'Road'}")
           p.label Possible Payoff:
           p.stat ${{ selected.maximumPayoff }}
