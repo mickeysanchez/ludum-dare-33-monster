@@ -33,6 +33,12 @@ angular.module('monsterApp')
 
     $scope.hidePostRobbing = function() {
       $scope.postRobbing = false;
+      $scope.postPostRobbing = true;
+    }
+
+    $scope.hidePostPostRobbing = function() {
+      $scope.player.money -= $scope.lastRobbery.randomCashSpend;
+      $scope.postPostRobbing = false;
     }
 
     $scope.rob = function() {
@@ -52,15 +58,19 @@ angular.module('monsterApp')
       $scope.selected.robbed = true;
       $scope.selected.baseSuccessPercentage = .05;
       $scope.selected.maximumPayoff -= $scope.lastRobbery.payoff;
+      $scope.lastRobbery.violence = $scope.player.violence;
       $scope.player.heat += $scope.calcHeat();
-      $scope.nextDay();
 
+      $scope.nextDay();
       $scope.affectNeighbors();
     }
 
     $scope.nextDay = function() {
       var DAYS_TIL_OFF_ALERT = 10;
       $scope.player.day += 1;
+
+      var rand = Math.round(_.random(0, $scope.player.money / 2));
+      $scope.lastRobbery.randomCashSpend = rand;
       // _.each($scope.alertedProperties, function(el) {
       //   if ($scope.player.day - el.alertedOn > DAYS_TIL_OFF_ALERT) {
 

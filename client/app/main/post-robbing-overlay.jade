@@ -7,6 +7,13 @@ div.post-robbing(ng-if="postRobbing")
         div.actions
           md-button.md-primary.md-raised(type="button" ng-click="hidePostRobbing()") Ok
 
+      div(ng-if="postPostRobbing")
+        h2 Success!
+        p You made away with ${{ lastRobbery.payoff }} worth of goods!
+
+        div.actions
+          md-button.md-primary.md-raised(type="button" ng-click="hidePostPostRobbing()") Ok
+
       div(ng-if="!lastRobbery.success")
         h2 Failure
         p You got caught. Refresh browser to play again.
