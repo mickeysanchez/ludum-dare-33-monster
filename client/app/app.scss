@@ -96,7 +96,12 @@ html {
   }
 }
 
+$red: rgb(211, 58, 58);
+
 // Component styles are injected through grunt
 // injector
+@import 'main/board.scss';
 @import 'main/main.scss';
+@import 'main/robbing-post-robbing.scss';
+@import 'main/sidebar.scss';
 // endinjector

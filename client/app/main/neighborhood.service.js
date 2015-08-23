@@ -51,7 +51,7 @@ angular.module('monsterApp')
     }
 
     var MIN_POSSIBLE_PAYOFF = 0;
-    var MAX_POSSIBLE_PAYOFF = 10000;
+    var MAX_POSSIBLE_PAYOFF = 500;
 
     function determineMaxPayoff(type, x, y) {
       if (type == "Road") {

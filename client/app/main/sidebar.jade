@@ -1,6 +1,6 @@
 div.sidebar
     div.player-stats
-      p.day Day: {{ player.day }}
+      p.day Night: {{ player.day }}
       p.money Cash: ${{ player.money }}
       p.heat Heat: {{ player.heat }}
       p.items Items:
@@ -36,4 +36,4 @@ div.sidebar
           p.bold Success: +{{ item.successModifier }}
           p.bold Violence: +{{ item.violenceModifier }}
           p.bold Capacity: +{{ item.capacityModifier }}
-          md-button.md-primary.md-raised(ng-click="buy(item)") BUY - ${{ item.price }}
+          md-button.md-primary.md-raised.green-button(ng-click="buy(item)") BUY - ${{ item.price }}

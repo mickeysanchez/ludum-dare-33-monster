@@ -16,15 +16,23 @@ angular.module('monsterApp')
       $scope.grid = GridMaker.newGrid($scope.numSquares);
       $scope.alertedProperties = [];
       $scope.items = Items.list;
+      $scope.preGame = true;
     }
 
-    // PLAYER ACTIONS
+    $scope.startGame = function() {
+      $scope.preGame = false;
+    }
+
     $scope.startRobbing = function() {
       $scope.robbing = true;
     }
 
     $scope.cancelRob = function() {
       $scope.robbing = false;
+    }
+
+    $scope.hidePostRobbing = function() {
+      $scope.postRobbing = false;
     }
 
     $scope.rob = function() {
@@ -97,10 +105,9 @@ angular.module('monsterApp')
 
     $scope.calcPayoff = function() {
       var payoff = 0;
-      var randPercent = _.random(.1, 1.0);
+      var randPercent = _.random(.5, 1.0);
       payoff = Math.round($scope.selected.maximumPayoff * randPercent);
       $scope.lastRobbery.payoff = payoff;
-      $scope.postRobbing = true;
       return payoff;
     }
 
@@ -117,11 +124,6 @@ angular.module('monsterApp')
       }
     }
 
-    $scope.hidePostRobbing = function() {
-      $scope.postRobbing = false;
-    }
-
-    // UTILS
     $scope.select = function(newlySelected) {
       $scope.selected = newlySelected;
     }
@@ -135,7 +137,7 @@ angular.module('monsterApp')
           $mdDialog.show(
             $mdDialog.alert()
             .clickOutsideToClose(true)
-            .title('You bought the ' + item.name)
+            .title('You bought the ' + item.name + ".")
             .ok('OK')
           )
         } else {

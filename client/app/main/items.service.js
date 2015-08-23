@@ -29,6 +29,20 @@ angular.module('monsterApp')
         violenceModifier: 20,
         capacityModifier: 0,
         price: 200
+      }, {
+        name: "Getaway Driver",
+        desc: "I hope you trust this guy... Split the money. Only lasts one night.",
+        successModifier: 50,
+        violenceModifier: 0,
+        capacityModifier: 50,
+        price: 0
+      }, {
+        name: "Rehab",
+        desc: "You won't spend so much money on drugs. For a little while at least...",
+        successModifier: 20,
+        violenceModifier: 0,
+        capacityModifier: 0,
+        price: 1000
       }]
     }
   });
