@@ -3,23 +3,37 @@ div.sidebar
       p.day Day: {{ player.day }}
       p.money Cash: ${{ player.money }}
       p.heat Heat: {{ player.heat }}
+      p.items Items:
+        span(ng-repeat="item in player.items track by $index")  -{{ item.name }}-
 
-    div.selected-stats(ng-if="selected")
+    div.selected-stats(ng-class="{'vis-hidden': !selected}")
       h3.red(ng-if="selected.robbed") ROBBED
+      h3.red(ng-if="selected.onAlert") ON ALERT
       h3 Property Info:
       div.stats
         div.type
           p.label Type:
           p.stat {{ selected.type }}
-        div.residents(ng-if="selected.type != 'Road'")
+        div.residents(ng-class="{'vis-hidden': selected.type == 'Road'}")
           p.label Residents:
           p.stat {{ selected.info.name }}
-        div.percentage(ng-if="selected.type != 'Road'")
+        div.percentage(ng-class="{'vis-hidden': selected.type == 'Road'}")
           p.label Chance for success:
           p.stat {{ selected.baseSuccessPercentage | rounded }}%
-        div.payoff(ng-if="selected.type != 'Road'")
+        div.payoff(ng-class="{'vis-hidden': selected.type == 'Road'}")
           p.label Possible Payoff:
           p.stat ${{ selected.maximumPayoff }}
 
       div.actions
-        md-button.md-primary.md-raised(ng-if="selected.type != 'Road'" type="button" ng-click="startRobbing()") Rob this property
+        md-button.md-warn.md-raised(ng-class="{'vis-hidden': selected.type == 'Road'}" type="button" ng-click="startRobbing()") Rob this property
+
+    div.store
+      h3 Store:
+      ul
+        li(ng-repeat="item in items")
+          p.bold {{ item.name }}
+          p {{ item.desc }}
+          p.bold Success: +{{ item.successModifier }}
+          p.bold Violence: +{{ item.violenceModifier }}
+          p.bold Capacity: +{{ item.capacityModifier }}
+          md-button.md-primary.md-raised(ng-click="buy(item)") BUY - ${{ item.price }}

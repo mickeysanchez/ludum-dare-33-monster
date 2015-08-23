@@ -1,19 +1,21 @@
 'use strict';
 
 angular.module('monsterApp')
-  .controller('MainCtrl', function($scope, $http, socket, GridMaker, $mdDialog) {
+  .controller('MainCtrl', function($scope, $http, socket, GridMaker, $mdDialog, Items) {
     $scope.init = function() {
-      $scope.numSquares = 50;
-      $scope.calcPercent = 100 / $scope.numSquares;
+      $scope.numSquares = 40;
       $scope.robbing = false;
       $scope.player = {
         day: 1,
         money: 0,
         violence: 0,
-        heat: 0
+        heat: 0,
+        items: []
       }
       $scope.lastRobbery = {}
       $scope.grid = GridMaker.newGrid($scope.numSquares);
+      $scope.alertedProperties = [];
+      $scope.items = Items.list;
     }
 
     // PLAYER ACTIONS
@@ -43,9 +45,19 @@ angular.module('monsterApp')
       $scope.selected.baseSuccessPercentage = .05;
       $scope.selected.maximumPayoff -= $scope.lastRobbery.payoff;
       $scope.player.heat += $scope.calcHeat();
-      $scope.player.day += 1;
+      $scope.nextDay();
 
       $scope.affectNeighbors();
+    }
+
+    $scope.nextDay = function() {
+      var DAYS_TIL_OFF_ALERT = 10;
+      $scope.player.day += 1;
+      // _.each($scope.alertedProperties, function(el) {
+      //   if ($scope.player.day - el.alertedOn > DAYS_TIL_OFF_ALERT) {
+
+      //   }
+      // })
     }
 
     $scope.affectNeighbors = function() {
@@ -61,7 +73,13 @@ angular.module('monsterApp')
       for (var y = topLeft; y < topRight; y++) {
         for (var x = topLeftX; x < bottomLeftX; x++) {
           if (y >= 0 && y < $scope.numSquares && x >= 0 && x < $scope.numSquares) {
-            $scope.grid[y][x].baseSuccessPercentage -= (violencePercent * MAX_EFFECT * _.random(.5, 1))
+            if (Math.abs(y - $scope.selected.y) + Math.abs(x - $scope.selected.x) < effect_radius) {
+              var square = $scope.grid[y][x];
+              square.baseSuccessPercentage -= (violencePercent * MAX_EFFECT * _.random(.5, 1))
+              square.onAlert = true;
+              square.alertedOn = $scope.player.day;
+              $scope.alertedProperties.push(square);
+            }
           }
         }
       }
@@ -106,6 +124,36 @@ angular.module('monsterApp')
     // UTILS
     $scope.select = function(newlySelected) {
       $scope.selected = newlySelected;
+    }
+
+    // STORE
+    $scope.buy = function(item) {
+      if (!_.some($scope.player.items, item)) {
+        if (item.price < $scope.player.money) {
+          $scope.player.money -= item.price;
+          $scope.player.items.push(item);
+          $mdDialog.show(
+            $mdDialog.alert()
+            .clickOutsideToClose(true)
+            .title('You bought the ' + item.name)
+            .ok('OK')
+          )
+        } else {
+          $mdDialog.show(
+            $mdDialog.alert()
+            .clickOutsideToClose(true)
+            .title('Not enough money.')
+            .ok('OK')
+          )
+        }
+      } else {
+        $mdDialog.show(
+          $mdDialog.alert()
+          .clickOutsideToClose(true)
+          .title('You\'ve already got one.')
+          .ok('OK')
+        )
+      }
     }
 
     // CALL INIT

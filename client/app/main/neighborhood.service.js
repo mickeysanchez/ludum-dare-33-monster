@@ -78,6 +78,7 @@ angular.module('monsterApp')
         }
         grid.push(row)
       }
+
       return grid;
     }
 
