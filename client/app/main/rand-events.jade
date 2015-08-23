@@ -2,8 +2,11 @@ div.post-robbing(ng-if="postPostRobbing")
     div.white
       div
         h2 Afterwards...
-        p Filled with adrenaline from last night's robbery, you spend the day high on drugs.
-        p You spend ${{lastRobbery.randomCashSpend}} on drugs.
+        p {{ lastRobbery.randomEvent.phrase }}, {{ lastRobbery.randomEvent.reason }}.
+        p
+          span You spend
+          span.money  ${{lastRobbery.randomEvent.randomCashSpend}}
+          span  {{ lastRobbery.randomEvent.spentOn }}.
 
         div.actions
           md-button.md-primary.md-raised(type="button" ng-click="hidePostPostRobbing()") Ok

@@ -1,7 +1,7 @@
 div.sidebar
     div.player-stats
-      p.day Night: {{ player.day }}
       p.money Cash: ${{ player.money }}
+      p.day Night: {{ player.day }}
       p.heat Heat: {{ player.heat }}
       p.items Items:
         span(ng-repeat="item in player.items track by $index")  -{{ item.name }}-

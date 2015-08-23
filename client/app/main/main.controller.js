@@ -37,7 +37,7 @@ angular.module('monsterApp')
     }
 
     $scope.hidePostPostRobbing = function() {
-      $scope.player.money -= $scope.lastRobbery.randomCashSpend;
+      $scope.player.money -= $scope.lastRobbery.randomEvent.randomCashSpend;
       $scope.postPostRobbing = false;
     }
 
@@ -60,6 +60,7 @@ angular.module('monsterApp')
       $scope.selected.maximumPayoff -= $scope.lastRobbery.payoff;
       $scope.lastRobbery.violence = $scope.player.violence;
       $scope.player.heat += $scope.calcHeat();
+      $scope.lastRobbery.randomEvent = $scope.randomEvent();
 
       $scope.nextDay();
       $scope.affectNeighbors();
@@ -69,8 +70,6 @@ angular.module('monsterApp')
       var DAYS_TIL_OFF_ALERT = 10;
       $scope.player.day += 1;
 
-      var rand = Math.round(_.random(0, $scope.player.money / 2));
-      $scope.lastRobbery.randomCashSpend = rand;
       // _.each($scope.alertedProperties, function(el) {
       //   if ($scope.player.day - el.alertedOn > DAYS_TIL_OFF_ALERT) {
 
@@ -192,6 +191,22 @@ angular.module('monsterApp')
         )
       }
     }
+
+    // RANDOM EVENTS
+    $scope.randomEvent = function() {
+      var phrases = ["Filled with adrenaline from last night's robbery", "Trying to forget past violence", "Trying to relax after last night's robbery", "Feeling on top of the world", "Feeling like nothing bad will every happen to you", "Stressed out from the robbery", "Feeling especially paranoid about getting caught"]
+      var reasons = ["you meet up with some prison buddies for a good time. They convince you to pay for everything", "you get a motel room and hole up", "you go to the casino", "you go to a bar", "you spend the whole day in a bar", "you look for drugs"]
+      var spends = ["on drugs", "on drinks", "on random shit you can't even remember", "gambling", "on a hotel room"]
+      var rand = Math.round(_.random($scope.player.money / 10, $scope.player.money / 2));
+      var randomCashSpend = rand;
+      return {
+        phrase: _.sample(phrases),
+        reason: _.sample(reasons),
+        spentOn: _.sample(spends),
+        randomCashSpend: randomCashSpend
+      }
+    }
+
 
     // CALL INIT
     $scope.init();
