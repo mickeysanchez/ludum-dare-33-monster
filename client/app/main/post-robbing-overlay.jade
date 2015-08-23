@@ -1,21 +1,26 @@
 div.post-robbing(ng-if="postRobbing")
     div.white
       div(ng-if="lastRobbery.success")
-        h2 Success!
-        p You made away with ${{ lastRobbery.payoff }} worth of goods!
+        h2(ng-if="lastRobbery.getawayMishap") Screwed.
+        h2(ng-if="!lastRobbery.getawayMishap") Success!
+        p(ng-if="!lastRobbery.getawayDriver")
+          span You made away with
+          span.money  ${{ lastRobbery.payoff }}
+          span  worth of goods!
+
+        p(ng-if="lastRobbery.getawayDriver && !lastRobbery.getawayMishap")
+          span You and your driver got away with
+          span.money  ${{ lastRobbery.payoff }}
+          span  each.
+
+        p(ng-if="lastRobbery.getawayDriver && lastRobbery.getawayMishap")
+          span The driver screwed you over.
+          span When you got in the car he took all the stolen money, plus held you up at gunpoint for
+          span.money-negative  ${{ lastRobbery.payoff | abs }}
 
         div.actions
           md-button.md-primary.md-raised(type="button" ng-click="hidePostRobbing()") Ok
 
-      div(ng-if="postPostRobbing")
-        h2 Success!
-        p
-          span You made away with
-          span.money    ${{ lastRobbery.payoff }}
-          span    worth of goods!
-
-        div.actions
-          md-button.md-primary.md-raised(type="button" ng-click="hidePostPostRobbing()") Ok
 
       div(ng-if="!lastRobbery.success")
         h2 Failure

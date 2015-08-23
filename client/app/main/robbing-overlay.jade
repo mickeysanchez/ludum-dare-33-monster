@@ -2,17 +2,14 @@ div.robbing(ng-if="robbing")
     div.white
       div.violence
         h3 How much VIOLENCE will you use in this robbery?
-        <md-slider flex min="0" max="{{ calcTotalViolence() }}" ng-model="player.violence" aria-label="">
+        <md-slider aria-label="violence slider" flex min="0" max="{{ player.possibleViolence() }}" ng-model="player.violence" aria-label="">
         </md-slider>
         div.violence-num Violence: {{ player.violence }}%
 
       div.stats
         div.percentage
           p Chance for success:
-          p.bold {{ calcSuccessPercentage() | rounded }}%
-        div.payoff
-          p Maximum Possible Payoff:
-          p.bold ${{ selected.maximumPayoff }}
+          p.bold.success {{ calcSuccessPercentage() | rounded }}%
 
       div.actions
         md-button.md-primary(type="button" ng-click="cancelRob()") Cancel

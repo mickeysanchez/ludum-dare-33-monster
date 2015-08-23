@@ -2,6 +2,27 @@ angular.module('monsterApp')
   .factory('Items', function() {
     return {
       list: [{
+        name: "Cigarettes",
+        desc: "Cool your nerves a little bit.",
+        successModifier: 3,
+        violenceModifier: 0,
+        capacityModifier: 0,
+        price: 10
+      }, {
+        name: "Baseball Bat",
+        desc: "Intimidation is key to cooperation.",
+        successModifier: 0,
+        violenceModifier: 3,
+        capacityModifier: 0,
+        price: 20
+      }, {
+        name: "Backpack",
+        desc: "Put more loot in here.",
+        successModifier: 0,
+        violenceModifier: 0,
+        capacityModifier: 3,
+        price: 20
+      }, {
         name: "Lockpick Kit",
         desc: "Use this to break in more quietly and increase your chances of success.",
         successModifier: 5,
@@ -16,12 +37,12 @@ angular.module('monsterApp')
         capacityModifier: 0,
         price: 50
       }, {
-        name: "Backpack",
-        desc: "Put more loot in here.",
+        name: "Duffel Bag",
+        desc: "Haul away more valuable goods.",
         successModifier: 0,
         violenceModifier: 0,
-        capacityModifier: 5,
-        price: 50
+        capacityModifier: 7,
+        price: 35
       }, {
         name: "Gun",
         desc: "Much more violence. Accidental violence likely to occur.",
@@ -43,6 +64,13 @@ angular.module('monsterApp')
         violenceModifier: 0,
         capacityModifier: 0,
         price: 1000
+      }, {
+        name: "Down payment on a house outside the city",
+        desc: "The only way to win the game.",
+        successModifier: 0,
+        violenceModifier: 0,
+        capacityModifier: 0,
+        price: 10000
       }]
     }
   });

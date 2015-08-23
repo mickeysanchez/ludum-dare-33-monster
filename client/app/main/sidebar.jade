@@ -8,7 +8,7 @@ div.sidebar
 
     div.selected-stats(ng-class="{'vis-hidden': !selected}")
       h3.red(ng-if="selected.robbed") ROBBED
-      h3.red(ng-if="selected.onAlert") ON ALERT
+      h3.red(ng-if="selected.onAlert") ON ALERT FROM NEARBY VIOLENCE
       h3 Property Info:
       div.stats
         div.type
@@ -19,7 +19,7 @@ div.sidebar
           p.stat {{ selected.info.name }}
         div.percentage(ng-class="{'vis-hidden': selected.type == 'Road'}")
           p.label Chance for success:
-          p.stat {{ selected.baseSuccessPercentage + itemSuccess() | rounded }}%
+          p.stat {{ selected.baseSuccessPercentage + player.successModifier() | rounded }}%
         div.payoff(ng-class="{'vis-hidden': selected.type == 'Road'}")
           p.label Possible Payoff:
           p.stat ${{ selected.maximumPayoff }}
@@ -36,4 +36,4 @@ div.sidebar
           p.bold Success: +{{ item.successModifier }}
           p.bold Violence: +{{ item.violenceModifier }}
           p.bold Capacity: +{{ item.capacityModifier }}
-          md-button.md-primary.md-raised.green-button(ng-click="buy(item)") BUY - ${{ item.price }}
+          md-button.md-primary.md-raised.green-button(ng-click="player.buy(item)") BUY - ${{ item.price }}
