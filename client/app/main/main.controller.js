@@ -19,13 +19,13 @@ angular.module('monsterApp')
         return item.price
       });
       $scope.preGame = true;
-      createjs.Sound.registerSound("assets/music/test.mp3", "music");
+      // createjs.Sound.registerSound("assets/music/monster.mp3", "music");
     }
 
     $scope.startGame = function() {
-      createjs.Sound.play("music", {
-        loop: -1
-      });
+      // createjs.Sound.play("music", {
+      //   loop: -1
+      // });
       $scope.preGame = false;
     }
 
