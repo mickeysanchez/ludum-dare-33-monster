@@ -6,7 +6,7 @@ var MAX_EFFECT = .25; // Max percent alerted properties can be raised. (success)
 var GETAWAY_MISHAP_OUT_OF_TEN = 8; // This number out of ten times something will go wrong with getaway driver;
 
 angular.module('monsterApp')
-  .controller('MainCtrl', function($scope, $http, socket, GridMaker, $mdDialog, Items, Player) {
+  .controller('MainCtrl', function($scope, $http, GridMaker, $mdDialog, Items, Player) {
     $scope.init = function() {
       $scope.numSquares = 40;
       $scope.robbing = false;

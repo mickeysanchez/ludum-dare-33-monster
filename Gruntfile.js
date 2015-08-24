@@ -673,7 +673,7 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('build', [
-    'clean:dist',
+  'clean:dist',
     'injector:sass',
     'concurrent:dist',
     'injector',

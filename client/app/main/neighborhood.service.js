@@ -27,7 +27,7 @@ angular.module('monsterApp')
     function createType(x, y) {
       var surrounding = getSurrounding(x, y)
       var squareTypes = ["Residential", "Commercial", "Road"];
-      type = "Residential";
+      var type = "Residential";
       type = (_.random(0, 100) < 25) ? "Commercial" : type;
       if (x % 3 == 0 || y % 5 == 0) type = "Road";
       // type = (_.random(0, 100) < 50) ? "Road" : type;

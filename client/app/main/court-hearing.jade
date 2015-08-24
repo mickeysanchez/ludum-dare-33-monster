@@ -4,7 +4,7 @@ div.post-robbing(ng-if="courtHearing")
         h3 Guilty.
         p They found you guilty on all counts.
         p They send you to jail for
-          span  {{ lastRobbery.randomEvent.possibleJailtime }} years.
+          span.money-negative  {{ lastRobbery.randomEvent.possibleJailtime }} years.
 
         div.actions
           md-button.md-primary.md-raised(type="button" ng-click="hideCourtHearing()") Ok

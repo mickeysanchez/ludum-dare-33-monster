@@ -4,7 +4,6 @@ angular.module('monsterApp', [
     'ngCookies',
     'ngResource',
     'ngSanitize',
-    'btford.socket-io',
     'ui.router',
     'ngMaterial'
   ])
