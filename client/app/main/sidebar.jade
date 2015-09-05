@@ -2,6 +2,7 @@ div.sidebar
     div.player-stats
       p.money Cash: ${{ player.money }}
       p.day Night: {{ player.day }}
+      p.age Age: {{ 18 + player.day / 365 | number:0}}
       //- p.heat Heat: {{ player.heat }}
       p.items Items:
         span(ng-repeat="item in player.items track by $index")  -{{ item.name }}-

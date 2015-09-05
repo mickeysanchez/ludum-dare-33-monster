@@ -1,7 +1,7 @@
 'use strict';
 
 var DAYS_TIL_OFF_ALERT = 10; // Days until nearby properties off alert.
-var MAX_EFFECT_RADIUS = 10; // Radius around robbed property that goes on alert.
+var MAX_EFFECT_RADIUS = 15; // Radius around robbed property that goes on alert.
 var MAX_EFFECT = .25; // Max percent alerted properties can be raised. (success)
 var GETAWAY_MISHAP_OUT_OF_TEN = 8; // This number out of ten times something will go wrong with getaway driver;
 
