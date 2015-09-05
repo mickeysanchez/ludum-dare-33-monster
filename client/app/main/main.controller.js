@@ -200,7 +200,8 @@ angular.module('monsterApp')
       if (square.type == "Road") {
         return 1
       } else {
-        return (1 - square.baseSuccessPercentage);
+        // return (1 - square.baseSuccessPercentage);
+        return 1;
       }
     }
 

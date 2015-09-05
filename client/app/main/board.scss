@@ -6,15 +6,15 @@
     overflow: auto;
 
     .row {
-      height: 25px;
+      height: 30px;
       white-space: nowrap;
 
       .square {
         display: inline-block;
         box-sizing: border-box;
-        border: 1px solid rgba(0,0,0,.1);
+        // border: 1px solid rgba(0,0,0,.1);
         height: 100%;
-        width: 25px;
+        width: 30px;
         vertical-align: bottom;
         position: relative;
 
@@ -36,10 +36,11 @@
           box-sizing: border-box;
           top: 0;
           left: 0;
+          background-size: contain;
         }
 
         .selector {
-          border: 5px solid green;
+          border: 5px solid red;
           z-index: 3;
           display: none;
         }
@@ -52,7 +53,8 @@
 
         &.residential {
           .colorer {
-            background: orange;
+            // background: orange;
+            background-image: url(/assets/images/residential-from-above.png);
           }
         }
 
@@ -62,9 +64,24 @@
           }
         }
 
-        &.road {
+        &.road-horiz {
           .colorer {
-            background: #676767;
+            // background: #676767;
+            background-image: url(/assets/images/road-horizontal.png);
+          }
+        }
+
+        &.road-vert {
+          .colorer {
+            // background: #676767;
+            background-image: url(/assets/images/road-vertical.png);
+          }
+        }
+
+        &.road-cross {
+          .colorer {
+            // background: #676767;
+            background-image: url(/assets/images/road-cross.png);
           }
         }
 

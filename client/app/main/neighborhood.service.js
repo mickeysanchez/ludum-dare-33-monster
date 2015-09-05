@@ -25,7 +25,7 @@ angular.module('monsterApp')
     }
 
     function createType(x, y) {
-      var surrounding = getSurrounding(x, y)
+
       var squareTypes = ["Residential", "Commercial", "Road"];
       var type = "Residential";
       type = (_.random(0, 100) < 25) ? "Commercial" : type;
@@ -34,11 +34,41 @@ angular.module('monsterApp')
       return type;
     }
 
-    function getSurrounding(x, y) {
+    function determineSurrounding(numSquares) {
+      for (var i = 0; i < numSquares + 1; i++) {
+        for (var j = 0; j < numSquares; j++) {
+          grid[i][j].surrounding = getSurrounding(i, j, numSquares)
+        }
+      }
+    }
 
+    function getSurrounding(y, x, numSquares) {
+      var above = false,
+        right = false,
+        left = false,
+        below = false;
+
+      if (y > 0) {
+        above = grid[y - 1][x].type
+      }
+
+      if (x < numSquares - 1) {
+        right = grid[y][x + 1].type
+      }
+
+      if (x > 0) {
+        left = grid[y][x - 1].type
+      }
+
+      if (y < numSquares) {
+        below = grid[y + 1][x].type
+      }
 
       return {
-        topLeft: "ya"
+        above: above,
+        right: right,
+        left: left,
+        below: below
       }
     }
 
@@ -71,13 +101,15 @@ angular.module('monsterApp')
     }
 
     var newGrid = function(numSquares) {
-      for (var i = 0; i < numSquares; i++) {
+      for (var i = 0; i < numSquares + 1; i++) {
         var row = []
         for (var j = 0; j < numSquares; j++) {
           row.push(createSquare(j, i))
         }
         grid.push(row)
       }
+
+      determineSurrounding(numSquares);
 
       return grid;
     }
