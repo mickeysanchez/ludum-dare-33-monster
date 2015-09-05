@@ -56,11 +56,23 @@
     ul {
       li {
         padding: 5px;
-        border-bottom: 1px solid rgba(0,0,0,.5);
         position: relative;
+        background: black;
+        color: white;
+        border-bottom: 1px solid white;
 
         p {
           width: 50%;
+
+          &.name {
+            width: 100%;
+            font-size: 1.1em;
+          }
+
+          &.desc {
+            margin: 10px 0;
+            line-height: .8em;
+          }
         }
 
         .md-primary {

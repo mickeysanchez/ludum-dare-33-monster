@@ -93,6 +93,11 @@ html {
     .vis-hidden {
       visibility: hidden;
     }
+
+    md-button, button, .md-button {
+      -webkit-border-radius: 0;
+      border-radius: 0;
+    }
   }
 }
 

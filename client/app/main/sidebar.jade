@@ -32,18 +32,18 @@ div.sidebar
       h3 Store:
       ul
         li(ng-repeat="item in items")
-          p.bold {{ item.name }}
-          p {{ item.desc }}
+          p.bold.name {{ item.name }}
+          p.desc {{ item.desc }}
           p.bold
             span Success:
             span(ng-if="item.successModifier >= 0")  +
-            span  {{ item.successModifier }}
+            span {{ item.successModifier }}
           p.bold
             span Violence:
             span(ng-if="item.violenceModifier >= 0")  +
-            span  {{ item.violenceModifier }}
+            span {{ item.violenceModifier }}
           p.bold
             span Capacity:
             span(ng-if="item.capacityModifier >= 0")  +
-            span  {{ item.capacityModifier }}
+            span {{ item.capacityModifier }}
           md-button.md-primary.md-raised.green-button(ng-click="player.buy(item)") BUY - ${{ item.price }}

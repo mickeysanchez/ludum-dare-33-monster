@@ -1,5 +1,6 @@
 'use strict';
 
+var MAP_SIZE = 40;
 var DAYS_TIL_OFF_ALERT = 10; // Days until nearby properties off alert.
 var MAX_EFFECT_RADIUS = 15; // Radius around robbed property that goes on alert.
 var MAX_EFFECT = .25; // Max percent alerted properties can be raised. (success)
@@ -8,7 +9,7 @@ var GETAWAY_MISHAP_OUT_OF_TEN = 8; // This number out of ten times something wil
 angular.module('monsterApp')
   .controller('MainCtrl', function($scope, $http, GridMaker, $mdDialog, Items, Player) {
     $scope.init = function() {
-      $scope.numSquares = 40;
+      $scope.numSquares = MAP_SIZE;
       $scope.robbing = false;
       $scope.courtHearing = false;
       $scope.player = Player;
