@@ -1,0 +1,64 @@
+.store {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 9;
+    border: 3px solid $black;
+    border-bottom: none;
+    width: 30%;
+    min-width: 300px;
+
+    h3 {
+      padding: 5px;
+      border-bottom: 3px solid $black;
+      background: $white;
+      outline: none;
+      cursor: pointer;
+
+      span {
+        span {
+          float: right;
+        }
+      }
+    }
+
+    ul {
+      height: 500px;
+      overflow: auto;
+
+      li {
+        padding: 5px;
+        position: relative;
+        background: $black;
+        color: $white;
+        border-bottom: 1px solid $white;
+
+        p {
+          width: 50%;
+
+          &.name {
+            width: 100%;
+            font-size: 1.1em;
+          }
+
+          &.desc {
+            margin: 10px 0;
+            line-height: .8em;
+          }
+        }
+
+        .md-primary {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+
+          &.green-button {
+            background-color: rgb(34, 139, 35);
+            &:hover {
+              background-color: rgb(34, 139, 35) !important;
+            }
+          }
+        }
+      }
+    }
+  }

@@ -73,7 +73,7 @@ table {
 
 html {
   height: 100%;
-  overflow: hidden;
+  // overflow: hidden;
 
   body {
     height: 100%;
@@ -101,7 +101,9 @@ html {
   }
 }
 
-$red: rgb(211, 58, 58);
+$red: rgba(211, 58, 58, .8);
+$black: #363636;
+$white: rgba(250, 250, 250, 1);
 
 // Component styles are injected through grunt
 // injector
@@ -109,4 +111,5 @@ $red: rgb(211, 58, 58);
 @import 'main/main.scss';
 @import 'main/robbing-post-robbing.scss';
 @import 'main/sidebar.scss';
+@import 'main/store.scss';
 // endinjector

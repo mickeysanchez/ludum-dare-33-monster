@@ -9,7 +9,7 @@ angular.module('monsterApp')
     self.items = [];
 
     self.buy = function(item) {
-      if (!_.some(self.items, item)) {
+      if (!self.has(item)) {
         if (item.price <= self.money) {
           self.money -= item.price;
           self.items.push(item);
@@ -44,6 +44,10 @@ angular.module('monsterApp')
           .ok('OK')
         )
       }
+    }
+
+    self.has = function(item) {
+      return _.some(self.items, item)
     }
 
     self.successModifier = function() {

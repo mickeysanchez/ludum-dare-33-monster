@@ -1,0 +1,23 @@
+div.store
+  h3(ng-click="storeOpen = !storeOpen")
+    span(ng-show="storeOpen") Hide Store
+      span -
+    span(ng-hide="storeOpen") View Store
+      span +
+  ul(ng-show="storeOpen")
+    li(ng-show="!player.has(item)" ng-repeat="item in items")
+      p.bold.name {{ item.name }}
+      p.desc {{ item.desc }}
+      p.bold
+        span Success:
+        span(ng-if="item.successModifier >= 0")  +
+        span {{ item.successModifier }}
+      p.bold
+        span Violence:
+        span(ng-if="item.violenceModifier >= 0")  +
+        span {{ item.violenceModifier }}
+      p.bold
+        span Capacity:
+        span(ng-if="item.capacityModifier >= 0")  +
+        span {{ item.capacityModifier }}
+      md-button.md-primary.md-raised.green-button(md-no-ink ng-disabled="player.money < item.price" ng-click="player.buy(item)") BUY - ${{ item.price }}
