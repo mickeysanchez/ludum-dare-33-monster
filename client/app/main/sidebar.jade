@@ -4,7 +4,7 @@ div.sidebar
       p.day Night: {{ player.day }}
       p.age Age: {{ 18 + player.day / 365 | number:0}}
       p.heat Heat: {{ player.heat }}
-      p.items Items:
+      p.items(ng-show="player.items.length > 0") Inventory:
         span(ng-repeat="item in player.items track by $index")  -{{ item.name }}-
 
     div.selected-stats
@@ -18,11 +18,14 @@ div.sidebar
       div(ng-class="{'vis-hidden': !selected}")
         h2.red(ng-if="selected.robbed") ROBBED
         h2.red(ng-if="selected.onAlert") ON ALERT FROM NEARBY VIOLENCE
+        
+        img.thumbnail(ng-src="{{selected.thumbnail}}")
+
         div.stats
           div.type
             p.label Type:
             p.stat {{ selected.type }}
-          div.residents(ng-class="{'vis-hidden': selected.type == 'Road'}")
+          div.residents(ng-class="{'vis-hidden': selected.type == 'Road' || selected.type == 'Park'}")
             p.label Residents:
             p.stat {{ selected.info.name }}
           div.percentage(ng-class="{'vis-hidden': selected.type == 'Road'}")

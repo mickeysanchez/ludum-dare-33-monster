@@ -6,7 +6,7 @@
     top: 10px;
     // display: inline-block;
     width: 30%;
-    min-width: 300px;
+    min-width: 320px;
     box-sizing: border-box;
     border: 3px solid $black;
     vertical-align: top;
@@ -29,10 +29,27 @@
         border-bottom: 3px solid $black;
       }
 
+      div {
+        position: relative;
+
+        h2 {
+          padding: 5px;
+          max-width: 50%;
+        }
+      }
+
+      .thumbnail {
+        position: absolute;
+        border: 3px solid $black;
+        right: 10px;
+        top: 10px;
+      }
+
       .stats {
         div {
           padding: 5px;
           margin-bottom: 5px;
+          width: 50%;
 
           p.stat {
             font-weight: bold;
@@ -43,7 +60,6 @@
       .actions {
         .rob-this-property {
           width: 96%;
-          margin: 6px 6px;
         }
       }
     }

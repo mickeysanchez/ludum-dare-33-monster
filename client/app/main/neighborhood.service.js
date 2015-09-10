@@ -8,7 +8,9 @@ angular.module('monsterApp')
 
     function createSquare(x, y) {
       var type = createType(x, y);
-      var name = createName(type);
+      var subtype = createSubType(type);
+      var thumbnail = '/assets/images/' + assignThumbnail(type, subtype);
+      var name = createName(type, subtype);
       var maximumPayoff = determineMaxPayoff(type, x, y);
       var baseSuccessPercentage = determineSuccessPercentage(type, maximumPayoff, x, y);
 
@@ -16,6 +18,8 @@ angular.module('monsterApp')
         x: x,
         y: y,
         type: type,
+        subtype: subtype,
+        thumbnail: thumbnail,
         baseSuccessPercentage: baseSuccessPercentage,
         maximumPayoff: maximumPayoff,
         info: {
@@ -26,12 +30,42 @@ angular.module('monsterApp')
 
     function createType(x, y) {
 
-      var squareTypes = ["Residential", "Commercial", "Road"];
+      var squareTypes = ["Residential", "Commercial", "Park", "Road"];
       var type = "Residential";
       type = (_.random(0, 100) < 25) ? "Commercial" : type;
+      type = (_.random(0, 100) < 5) ? "Park" : type;
       if (x % 3 == 0 || y % 5 == 0) type = "Road";
       // type = (_.random(0, 100) < 50) ? "Road" : type;
       return type;
+    }
+
+    function createSubType(type) {
+      var businessTypes = ["Convenience Store", "Gas Station", "Shoes", "Clothing", "Pawn Shop", "Bank"]
+
+      if (type == "Commercial") {
+        return _.sample(businessTypes);
+      } else {
+        return ""
+      }
+    }
+
+    function assignThumbnail(type, subtype) {
+      if (type == "Residential") {
+        return "house.png"
+      } else if (type == "Commercial") {
+        return {
+          "Convenience Store": "convenience-store.png",
+          "Gas Station": "gas-station.png",
+          "Shoes": "clothing-store.png",
+          "Clothing": "clothing-store.png",
+          "Pawn Shop": "pawn-shop.png",
+          "Bank": "bank.png"
+        }[subtype]
+      } else if (type == "Road") {
+        return "road-horizontal.png"
+      } else if (type == "Park") {
+        return "park.png"
+      }
     }
 
     function determineSurrounding(numSquares) {
@@ -72,12 +106,11 @@ angular.module('monsterApp')
       }
     }
 
-    function createName(type) {
+    function createName(type, subtype) {
       if (type == "Residential") {
         return chance.last() + " Family"
       } else if (type == "Commercial") {
-        var businessTypes = ["Convenience Store", "Gas Station", "Shoes", "Clothing", "Pawn Shop", "Grocery"]
-        return chance.capitalize(chance.word()) + " " + _.sample(businessTypes);
+        return chance.capitalize(chance.word()) + " " + subtype;
       } else {
         return ""
       }
