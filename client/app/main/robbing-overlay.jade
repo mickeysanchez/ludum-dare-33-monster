@@ -1,5 +1,5 @@
-div.robbing(ng-if="robbing")
-    div.white
+div.robbing(ng-if="robbing || applyingForJob")
+    div.white(ng-show="robbing")
       div.violence
         h3 How much VIOLENCE will you use in this robbery?
         <md-slider aria-label="violence slider" flex min="0" max="{{ player.possibleViolence() }}" ng-model="player.violence" aria-label="">
@@ -14,3 +14,24 @@ div.robbing(ng-if="robbing")
       div.actions
         md-button.md-primary(type="button" ng-click="cancelRob()") Cancel
         md-button.md-warn.md-raised(ng-click="rob()") Rob
+
+    div.white(ng-show="applyingForJob")
+      div.violence
+        h3 How DISHONEST do you want to be during your interview?
+        <md-slider aria-label="dishonesty slider" flex min="0" max="100" ng-model="player.dishonesty" aria-label="">
+        </md-slider>
+        div.violence-num Dishonesty {{ player.dishonesty }}%
+
+      div.stats
+        div.percentage
+          p Chance for success:
+          p.bold.success {{ calcSuccessPercentageJob() | rounded }}%
+
+        div.pay 
+          p Pay:
+          p.bold ${{ selected.jobPay | number:0 }} / hr
+          p.bold ${{ selected.jobPay * 8 | number:0 }} / day
+
+      div.actions
+        md-button.md-primary(type="button" ng-click="cancelApplyJob()") Cancel
+        md-button.md-warn.md-raised(ng-click="applyToJob()") Apply

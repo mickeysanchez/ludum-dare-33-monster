@@ -13,6 +13,8 @@ angular.module('monsterApp')
       var name = createName(type, subtype);
       var maximumPayoff = determineMaxPayoff(type, x, y);
       var baseSuccessPercentage = determineSuccessPercentage(type, maximumPayoff, x, y);
+      var jobSuccessPercentage = determineJobSuccess(baseSuccessPercentage);
+      var jobPay = determineJobPay(jobSuccessPercentage);
 
       return {
         x: x,
@@ -21,6 +23,8 @@ angular.module('monsterApp')
         subtype: subtype,
         thumbnail: thumbnail,
         baseSuccessPercentage: baseSuccessPercentage,
+        jobSuccessPercentage: jobSuccessPercentage,
+        jobPay: jobPay,
         maximumPayoff: maximumPayoff,
         info: {
           name: name
@@ -117,20 +121,20 @@ angular.module('monsterApp')
     }
 
     function determineMaxPayoff(type, x, y) {
-      if (type == "Road") {
-        return 0;
-      } else {
+      // if (type == "Road") {
+      //   return 0;
+      // } else {
         return _.random(MIN_POSSIBLE_PAYOFF, MAX_POSSIBLE_PAYOFF);
-      }
+      // }
     }
 
     var determineSuccessPercentage = function determineSuccessPercentage(type, maximumPayoff, x, y) {
-      if (type == "Road") {
-        return 0;
-      } else {
+      // if (type == "Road") {
+      //   return 0;
+      // } else {
         var percentPayoff = maximumPayoff / MAX_POSSIBLE_PAYOFF
         return 1 - percentPayoff;
-      }
+      // }
     }
 
     var newGrid = function(numSquares) {
@@ -145,6 +149,17 @@ angular.module('monsterApp')
       determineSurrounding(numSquares);
 
       return grid;
+    }
+
+    var determineJobSuccess = function (baseSuccessPercentage) {
+      return baseSuccessPercentage/10;
+    }
+
+    var determineJobPay = function (jobSuccessPercentage) {
+      var pay = 100 * jobSuccessPercentage + _.random(0, 10);
+      pay = (pay < 8) ? 8 : pay;
+      pay = (pay > 20) ? 20 : pay;
+      return pay;
     }
 
 

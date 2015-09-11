@@ -28,12 +28,18 @@ div.sidebar
           div.residents(ng-class="{'vis-hidden': selected.type == 'Road' || selected.type == 'Park'}")
             p.label Residents:
             p.stat {{ selected.info.name }}
-          div.percentage(ng-class="{'vis-hidden': selected.type == 'Road'}")
+          div.percentage
             p.label Chance for success:
             p.stat {{ selected.baseSuccessPercentage + player.successModifier() | rounded }}%
-          div.payoff(ng-class="{'vis-hidden': selected.type == 'Road'}")
+          div.payoff
             p.label Possible Payoff:
             p.stat ${{ selected.maximumPayoff }}
 
         div.actions
-          md-button.md-warn.md-raised.rob-this-property(md-no-ink ng-class="{'vis-hidden': selected.type == 'Road'}" type="button" ng-click="startRobbing()") Rob this property
+          md-button.md-primary.md-raised.rob-this-property(md-no-ink type="button" ng-show="selected.type == 'Commercial'" ng-click="applyForJob()")
+            span Apply For Job 
+
+          md-button.md-warn.md-raised.rob-this-property(md-no-ink type="button" ng-click="startRobbing()") 
+            span(ng-show="selected.type == 'Residential' || selected.type == 'Commercial'") Rob this property
+            span(ng-show="selected.type == 'Park'") Mug passerby
+            span(ng-show="selected.type == 'Road'") Attempt Carjacking

@@ -5,6 +5,9 @@ var DAYS_TIL_OFF_ALERT = 10; // Days until nearby properties off alert.
 var MAX_EFFECT_RADIUS = 15; // Radius around robbed property that goes on alert.
 var MAX_EFFECT = .25; // Max percent alerted properties can be raised. (success)
 var GETAWAY_MISHAP_OUT_OF_TEN = 8; // This number out of ten times something will go wrong with getaway driver;
+var MIN_RAND_EVENT_SPEND_PERCENT = .05; // Minimum percent of total money spent on random events.
+var MAX_RAND_EVENT_SPEND_PERCENT = .3; // Maximum percent of total money spent on random events.
+
 
 angular.module('monsterApp')
   .controller('MainCtrl', function($scope, $http, GridMaker, $mdDialog, Items, Player) {
@@ -40,6 +43,14 @@ angular.module('monsterApp')
 
     $scope.cancelRob = function() {
       $scope.robbing = false;
+    }
+
+    $scope.applyForJob = function() {
+      $scope.applyingForJob = true;
+    }
+
+    $scope.cancelApplyJob = function() {
+      $scope.applyingForJob = false;
     }
 
     $scope.hidePostRobbing = function() {
@@ -103,6 +114,14 @@ angular.module('monsterApp')
       $scope.lastRobbery.randomEvent = $scope.randomFailEvent();
     }
 
+    $scope.applyToJob = function () {
+      if (_.random(0.0, 1.0) < $scope.calcSuccessPercentageJob()) {
+        enactSuccesfulJobApplication();
+      } else {
+        enactFailedJobApplication();
+      }
+    }
+
     $scope.progressDay = function() {
       $scope.player.day += 1;
     }
@@ -153,6 +172,11 @@ angular.module('monsterApp')
       return (successPercent / 2) + (violencePercent * (successPercent / 2));
     }
 
+    $scope.calcSuccessPercentageJob = function () {
+      var dishonestyPercent = ($scope.player.dishonesty / 100);
+      return ($scope.selected.jobSuccessPercentage / 2) + (dishonestyPercent * ($scope.selected.jobSuccessPercentage / 2));
+    }
+
     $scope.calcPayoff = function() {
       var payoff = 0;
       var min = (.5 + $scope.player.capacityModifier());
@@ -198,12 +222,12 @@ angular.module('monsterApp')
     }
 
     $scope.calcOpacity = function(square) {
-      if (square.type == "Road") {
-        return 1
-      } else {
-        // return (1 - square.baseSuccessPercentage);
-        return 1;
-      }
+      // if (square.type == "Road") {
+      //   return 1
+      // } else {
+        // return (.9 - square.baseSuccessPercentage/4);
+        // return 1;
+      // }
     }
 
     $scope.goToCourt = function(lawyer) {
@@ -239,7 +263,7 @@ angular.module('monsterApp')
           var phrases = ["Filled with adrenaline from last night's robbery", "Trying to forget past violence", "Trying to relax after last night's robbery", "Feeling on top of the world", "Feeling like nothing bad will every happen to you again", "Stressed out from the robbery", "Feeling especially paranoid about getting caught"]
           var reasons = ["you meet up with some prison buddies for a good time. They convince you to pay for everything", "you get a motel room and hole up", "you go to the casino", "you go to a bar", "you spend the whole day in a bar", "you look for drugs"]
           var spends = ["on drugs", "on drinks", "on random shit you can't even remember", "gambling", "on a motel room"]
-          var randomCashSpend = Math.ceil(_.random($scope.player.money / 10, $scope.player.money / 2));;
+          var randomCashSpend = Math.ceil(_.random($scope.player.money * MIN_RAND_EVENT_SPEND_PERCENT, $scope.player.money * MAX_RAND_EVENT_SPEND_PERCENT));;
           return {
             phrase: _.sample(phrases),
             reason: _.sample(reasons),

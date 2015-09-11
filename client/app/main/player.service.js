@@ -5,6 +5,7 @@ angular.module('monsterApp')
     self.day = 0;
     self.money = 0;
     self.violence = 0;
+    self.dishonesty = 0;
     self.heat = 0;
     self.items = [];
 
