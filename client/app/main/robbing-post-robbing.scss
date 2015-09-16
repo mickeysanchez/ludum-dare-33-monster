@@ -29,8 +29,9 @@
     }
 
     md-slider .md-thumb:after {
-      border-color: black;
-      background-color: $red;
+      border: 3px solid black;
+      background-color: rgba(211, 58, 58, 1);
+      border-radius: 0;
     }
 
     md-slider .md-track.md-track-fill {

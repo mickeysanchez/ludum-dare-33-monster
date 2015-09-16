@@ -18,6 +18,8 @@ div.sidebar
       div(ng-class="{'vis-hidden': !selected}")
         h2.red(ng-if="selected.robbed") ROBBED
         h2.red(ng-if="selected.onAlert") ON ALERT FROM NEARBY VIOLENCE
+        h2.red(ng-if="selected.fired") FIRED
+        h2.red(ng-if="selected.failedApplication") FAILED JOB APPLICATION
         
         img.thumbnail(ng-src="{{selected.thumbnail}}")
 
@@ -36,8 +38,10 @@ div.sidebar
             p.stat ${{ selected.maximumPayoff }}
 
         div.actions
-          md-button.md-primary.md-raised.rob-this-property(md-no-ink type="button" ng-show="selected.type == 'Commercial'" ng-click="applyForJob()")
+          md-button.md-primary.md-raised.rob-this-property(ng-disabled="selected.fired || selected.failedApplication" md-no-ink type="button" ng-show="selected.type == 'Commercial' && !selected.employedHere" ng-click="applyForJob()")
             span Apply For Job 
+          md-button.md-primary.md-raised.rob-this-property(md-no-ink type="button" ng-show="selected.type == 'Commercial' && selected.employedHere" ng-click="work()")
+            span Work
 
           md-button.md-warn.md-raised.rob-this-property(md-no-ink type="button" ng-click="startRobbing()") 
             span(ng-show="selected.type == 'Residential' || selected.type == 'Commercial'") Rob this property

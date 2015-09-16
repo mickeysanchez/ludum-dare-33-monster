@@ -1,4 +1,4 @@
-div.robbing(ng-if="robbing || applyingForJob")
+div.robbing(ng-if="robbing || applyingForJob || working")
     div.white(ng-show="robbing")
       div.violence
         h3 How much VIOLENCE will you use in this robbery?
@@ -30,8 +30,22 @@ div.robbing(ng-if="robbing || applyingForJob")
         div.pay 
           p Pay:
           p.bold ${{ selected.jobPay | number:0 }} / hr
-          p.bold ${{ selected.jobPay * 8 | number:0 }} / day
+          p.bold ${{ selected.jobPay * 8 | number:0 }} max per day
 
       div.actions
         md-button.md-primary(type="button" ng-click="cancelApplyJob()") Cancel
         md-button.md-warn.md-raised(ng-click="applyToJob()") Apply
+
+    div.white(ng-show="working")
+      div
+        h2 Success:
+      
+      br
+
+      div
+        p
+          span You worked a {{ randWorkHours }} hour shift and made 
+          span.money ${{ daysPay }}.
+
+      div.actions
+        md-button.md-warn.md-raised(ng-click="postWorking()") Ok

@@ -1,5 +1,5 @@
-div.post-robbing(ng-if="postRobbing")
-    div.white
+div.post-robbing(ng-if="postRobbing || postApplyingForJob")
+    div.white(ng-if="postRobbing")
       div(ng-if="lastRobbery.success")
         h2(ng-if="lastRobbery.getawayMishap") Screwed.
         h2(ng-if="!lastRobbery.getawayMishap") Success:
@@ -28,3 +28,18 @@ div.post-robbing(ng-if="postRobbing")
         div.actions
           md-button.md-primary(type="button" ng-click="goToCourt(false)") Accept court appointed attourney
           md-button.md-primary.md-raised.green-button(type="button" ng-click="goToCourt(true)") Hire a Lawyer - $500
+
+    div.white(ng-if="postApplyingForJob")
+      div(ng-if="selected.employedHere")
+        h2 Success:
+        p 
+          span You were hired. You start tomorrow. 
+          span Don't miss a day, or you'll be fired.
+
+      div(ng-if="!selected.employedHere") 
+        h2 Failed:
+        p
+          span They wouldn't hire you.
+
+      div.actions
+          md-button.md-primary.md-raised(type="button" ng-click="hidePostApplying()") Ok

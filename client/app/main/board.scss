@@ -117,6 +117,14 @@
             opacity: .5 !important;
           }
         }
+
+        &.employed {
+          .colorer {
+            background: blue;
+            border: 3px solid blue;
+            opacity: .5;
+          }
+        }
       }
     }
   }

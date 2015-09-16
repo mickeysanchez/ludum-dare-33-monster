@@ -53,6 +53,21 @@ angular.module('monsterApp')
       $scope.applyingForJob = false;
     }
 
+    $scope.work = function () {
+      $scope.randWorkHours = _.random(3, 8);
+      $scope.daysPay = Math.round($scope.randWorkHours * $scope.employedAt.jobPay);
+      $scope.employedAt.workedOn = $scope.player.day;
+      $scope.working = true;
+    }
+
+    $scope.postWorking = function () {
+      $scope.player.money += $scope.daysPay;
+      $scope.working = false;
+      $scope.progressDay();
+      $scope.lastRobbery.randomEvent = $scope.randomEvent();
+      $scope.postPostRobbing = true;
+    }
+
     $scope.hidePostRobbing = function() {
       $scope.postRobbing = false;
       $scope.postPostRobbing = true;
@@ -61,6 +76,10 @@ angular.module('monsterApp')
     $scope.hidePostPostRobbing = function() {
       $scope.player.money -= $scope.lastRobbery.randomEvent.randomCashSpend;
       $scope.postPostRobbing = false;
+    }
+
+    $scope.hidePostApplying = function () {
+      $scope.postApplyingForJob = false
     }
 
     $scope.hideCourtHearing = function() {
@@ -110,19 +129,42 @@ angular.module('monsterApp')
     $scope.enactFailedRobbery = function() {
       $scope.lastRobbery.success = false;
       $scope.lastRobbery.payoff = Math.round($scope.player.money * _.random(.5, .9));
-      $scope.player.money -= $scope.lastRobbery.payoff;
       $scope.lastRobbery.randomEvent = $scope.randomFailEvent();
     }
 
     $scope.applyToJob = function () {
-      if (_.random(0.0, 1.0) < $scope.calcSuccessPercentageJob()) {
-        enactSuccesfulJobApplication();
+      if (_.random(0.01, 1.0) < ($scope.calcSuccessPercentageJob() + .05)) {
+        enactSuccessfulJobApplication();
       } else {
         enactFailedJobApplication();
       }
+
+      $scope.applyingForJob = false;
+      $scope.postApplyingForJob = true;
+      $scope.progressDay();
+    }
+
+    function enactSuccessfulJobApplication() {
+      $scope.selected.employedHere = true;
+      if ($scope.employedAt) {
+        $scope.employedAt.fired = true;
+        $scope.employedAt.employedHere = false;
+      }
+      $scope.employedAt = $scope.selected;
+      $scope.employedAt.workedOn = $scope.player.day;
+    }
+
+    function enactFailedJobApplication() {
+      $scope.selected.failedApplication = true;
+      $scope.selected.employedHere = false;
     }
 
     $scope.progressDay = function() {
+      if ($scope.employedAt && $scope.player.day - $scope.employedAt.workedOn > 0) {
+        $scope.employedAt.employedHere = false;
+        $scope.employedAt.fired = true;
+        $scope.employedAt = undefined;
+      }
       $scope.player.day += 1;
     }
 
@@ -173,6 +215,7 @@ angular.module('monsterApp')
     }
 
     $scope.calcSuccessPercentageJob = function () {
+      if ($scope.selected.fired) return 0;
       var dishonestyPercent = ($scope.player.dishonesty / 100);
       return ($scope.selected.jobSuccessPercentage / 2) + (dishonestyPercent * ($scope.selected.jobSuccessPercentage / 2));
     }
