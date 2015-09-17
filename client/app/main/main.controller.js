@@ -166,6 +166,7 @@ angular.module('monsterApp')
         $scope.employedAt = undefined;
       }
       $scope.player.day += 1;
+      $scope.player.heat = $scope.player.heat - (_.random(0.01, .6) * $scope.player.heat);
     }
 
     $scope.deAlertProperties = function() {

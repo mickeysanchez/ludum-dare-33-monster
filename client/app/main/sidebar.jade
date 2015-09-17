@@ -1,9 +1,24 @@
 div.sidebar
     div.player-stats
-      p.money Cash: ${{ player.money }}
-      p.day Night: {{ player.day }}
-      p.age Age: {{ 18 + player.day / 365 | number:0}}
-      p.heat Heat: {{ player.heat }}
+      div.question-mark ?
+        table.info 
+          tr 
+            td.bold Cash: 
+            td Use cash to buy new items to upgrade your abilities.
+          tr
+            td.bold Night & Age:
+            td How many nights you've played and how old your character is.
+          tr 
+            td.bold Heat: 
+            td How much the police want to catch you (which makes you more stressed).
+      p
+        span.money Cash: ${{ player.money }}
+      p.day 
+        span Night: {{ player.day }}
+      p.age 
+        span Age: {{ 18 + player.day / 365 | number:0}}
+      p.heat 
+        span Heat: {{ player.heat | number:0 }}
       p.items(ng-show="player.items.length > 0") Inventory:
         span(ng-repeat="item in player.items track by $index")  -{{ item.name }}-
 
