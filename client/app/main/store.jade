@@ -2,8 +2,10 @@ div.store
   h3(ng-click="storeOpen = !storeOpen")
     span(ng-show="storeOpen") Hide Store
       span -
-    span(ng-hide="storeOpen") View Store
-      span +
+    p.cash(ng-hide="storeOpen") $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+    span(ng-hide="storeOpen") Open Store
+      //- span +
+    p.cash(ng-hide="storeOpen") $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   ul(ng-show="storeOpen")
     li(ng-show="!player.has(item)" ng-repeat="item in items")
       p.bold.name {{ item.name }}
