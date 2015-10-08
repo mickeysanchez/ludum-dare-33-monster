@@ -8,6 +8,18 @@
     background: rgba(0,0,0,.5);
     z-index: 10;
 
+    .police-car {
+      position: absolute;
+      bottom: 20px;
+    }
+
+    .jail {
+      position: absolute;
+      top: 11px;
+      right: 27px;
+      height: 80px;
+    }
+
     .white {
       width: 500px;
       padding: 20px;

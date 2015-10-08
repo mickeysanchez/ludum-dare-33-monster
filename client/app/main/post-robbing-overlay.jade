@@ -25,6 +25,7 @@ div.post-robbing(ng-if="postRobbing || postApplyingForJob")
       div(ng-if="!lastRobbery.success")
         h2 You were caught:
         p {{ lastRobbery.randomEvent.reason }}
+        img.police-car(src="/assets/images/police-car.png")
         div.actions
           md-button.md-primary(type="button" ng-click="goToCourt(false)") Accept court appointed attourney
           md-button.md-primary.md-raised.green-button(type="button" ng-click="goToCourt(true)") Hire a Lawyer - $500
@@ -32,11 +33,11 @@ div.post-robbing(ng-if="postRobbing || postApplyingForJob")
     div.white(ng-if="postApplyingForJob")
       div(ng-if="selected.employedHere")
         h2 Success:
-        p 
-          span You were hired. You start tomorrow. 
+        p
+          span You were hired. You start tomorrow.
           span Don't miss a day, or you'll be fired.
 
-      div(ng-if="!selected.employedHere") 
+      div(ng-if="!selected.employedHere")
         h2 Failed:
         p
           span They wouldn't hire you.

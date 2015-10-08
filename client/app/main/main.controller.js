@@ -85,10 +85,19 @@ angular.module('monsterApp')
     $scope.hideCourtHearing = function() {
       if ($scope.lastRobbery.guilty) {
         $scope.player.day += $scope.lastRobbery.randomEvent.possibleJailtime * 365;
+
+        var new_items = []
+        _.each($scope.player.items, function(item) {
+          if (item.name == 'Rehab')
+            new_items.push(item);
+        })
+        $scope.player.items = new_items;
+
       } else {
         $scope.player.day += 2;
       }
 
+      $scope.player.heat = $scope.player.heat / 2;
       $scope.courtHearing = false;
 
       $scope.deAlertProperties();
@@ -103,6 +112,7 @@ angular.module('monsterApp')
         $scope.enactFailedRobbery();
       }
 
+      $scope.player.heat += $scope.calcHeat();
       $scope.selected.robbed = true;
       $scope.selected.baseSuccessPercentage = .05;
       $scope.selected.maximumPayoff -= $scope.lastRobbery.payoff;
@@ -119,7 +129,6 @@ angular.module('monsterApp')
       $scope.lastRobbery.payoff = $scope.calcPayoff();
 
       $scope.player.money += $scope.lastRobbery.payoff;
-      $scope.player.heat += $scope.calcHeat();
 
       $scope.lastRobbery.randomEvent = $scope.randomEvent();
 
@@ -130,13 +139,6 @@ angular.module('monsterApp')
       $scope.lastRobbery.success = false;
       $scope.lastRobbery.payoff = Math.round($scope.player.money * _.random(.5, .9));
       $scope.lastRobbery.randomEvent = $scope.randomFailEvent();
-
-      var new_items = []
-      _.each($scope.player.items, function(item) {
-        if (item.name == 'Rehab')
-          new_items.push(item);
-      })
-      $scope.player.items = new_items;
     }
 
     $scope.applyToJob = function() {
@@ -282,7 +284,7 @@ angular.module('monsterApp')
     }
 
     $scope.goToCourt = function(lawyer) {
-      var guilty = _.random(0, 10) > 2;
+      var guilty = _.random(0, 10) > 1;
       if (lawyer) {
         if ($scope.player.money >= 500) {
           $scope.player.money -= 500;
@@ -311,7 +313,7 @@ angular.module('monsterApp')
         if (!_.some($scope.player.items, {
             name: "Rehab"
           })) {
-          var phrases = ["Filled with adrenaline from last night's robbery", "Trying to forget past violence", "Trying to relax after last night's robbery", "Feeling on top of the world", "Feeling like nothing bad will every happen to you again", "Stressed out from the robbery", "Feeling especially paranoid about getting caught"]
+          var phrases = ["Filled with adrenaline from last night's success", "Trying to forget past violence", "Trying to relax after last night's job", "Feeling on top of the world", "Feeling like nothing bad will every happen to you again", "Stressed out from, well... you know", "Feeling especially paranoid about getting caught"]
           var reasons = ["you meet up with some prison buddies for a good time. They convince you to pay for everything", "you get a motel room and hole up", "you go to the casino", "you go to a bar", "you spend the whole day in a bar", "you look for drugs"]
           var spends = ["on drugs", "on drinks", "on random shit you can't even remember", "gambling", "on a motel room"]
           var randomCashSpend = Math.ceil(_.random($scope.player.money * MIN_RAND_EVENT_SPEND_PERCENT, $scope.player.money * MAX_RAND_EVENT_SPEND_PERCENT));;
@@ -340,7 +342,9 @@ angular.module('monsterApp')
     }
 
     $scope.randomFailEvent = function() {
-      var reasons = ['There was a hidden camera. The police picked you up on the street the next day.', 'The neighbors saw you going in. The police ran you down in the street.', 'They were waiting for you. The police must have been tailing you.', 'The place had a silent alarm and the police were outside when you left.', 'The owners were there. One of them snuck up behind you with a gun and you decided to give up.'];
+      var reasons = ['There was a hidden camera. The police picked you up on the street the next day.', 'The neighbors called the cops. The police ran you down in the street.', 'They were waiting for you. The police must have been tailing you.',
+        'They were ready for you, and you got knocked out.'
+      ];
 
       return {
         reason: _.sample(reasons),
