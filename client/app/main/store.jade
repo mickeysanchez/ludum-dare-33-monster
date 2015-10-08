@@ -8,6 +8,8 @@ div.store
     p.cash(ng-hide="storeOpen") $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   ul(ng-show="storeOpen")
     li(ng-show="!player.has(item)" ng-repeat="item in items")
+      div.image
+        img(ng-src="{{ '/assets/images/' + itemImageName(item.name) }}")
       p.bold.name {{ item.name }}
       p.desc {{ item.desc }}
       p.bold

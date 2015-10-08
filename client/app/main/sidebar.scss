@@ -58,6 +58,55 @@
       font-size: 18px;
     }
 
+    .items {
+      border-bottom: 3px solid $black;
+      padding: 2px;
+      text-align: right;
+      background: $black;
+      color: $white;
+
+      .label {
+        position: relative;
+        bottom: 6px;
+        margin-right: 3px;
+      }
+
+      .image {
+        border: 1px solid white;
+        height: 20px;
+        width: 20px;
+        margin-right: 3px;
+        display: inline-block;
+        position: relative;
+
+        img {
+          height: 100%;
+          width: 100%;
+        }
+
+        .item-name {
+          position: absolute;
+          border: 3px solid $black;
+          background: white;
+          padding: 5px;
+          right: 0;
+          color: $black;
+          text-align: center;
+          display: none;
+        }
+
+        &:hover {
+          .item-name {
+            display: block;
+          }
+        }
+      }
+    }
+
+    .italic {
+      text-decoration: italic;
+    }
+
     .selected-stats {
       // margin-top: 10px;
 

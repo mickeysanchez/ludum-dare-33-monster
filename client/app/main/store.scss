@@ -9,7 +9,7 @@
     min-width: 300px;*/
     width: 350px;
 
-    &:hover { 
+    &:hover {
       .cash {
         color: green;
       }
@@ -42,17 +42,30 @@
         color: $white;
         border-bottom: 1px solid $white;
 
+        .image {
+          position: absolute;
+          height: 50px;
+          width: 50px;
+          top: 14px;
+          right: 25px;
+
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+
         p {
           width: 50%;
 
           &.name {
-            width: 100%;
+            width: 70%;
             font-size: 1.1em;
           }
 
           &.desc {
             margin: 10px 0;
-            line-height: .8em;
+            line-height: .87em;
           }
         }
 

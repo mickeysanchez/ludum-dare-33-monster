@@ -53,14 +53,14 @@ angular.module('monsterApp')
       $scope.applyingForJob = false;
     }
 
-    $scope.work = function () {
+    $scope.work = function() {
       $scope.randWorkHours = _.random(3, 8);
       $scope.daysPay = Math.round($scope.randWorkHours * $scope.employedAt.jobPay);
       $scope.employedAt.workedOn = $scope.player.day;
       $scope.working = true;
     }
 
-    $scope.postWorking = function () {
+    $scope.postWorking = function() {
       $scope.player.money += $scope.daysPay;
       $scope.working = false;
       $scope.progressDay();
@@ -78,7 +78,7 @@ angular.module('monsterApp')
       $scope.postPostRobbing = false;
     }
 
-    $scope.hidePostApplying = function () {
+    $scope.hidePostApplying = function() {
       $scope.postApplyingForJob = false
     }
 
@@ -130,9 +130,16 @@ angular.module('monsterApp')
       $scope.lastRobbery.success = false;
       $scope.lastRobbery.payoff = Math.round($scope.player.money * _.random(.5, .9));
       $scope.lastRobbery.randomEvent = $scope.randomFailEvent();
+
+      var new_items = []
+      _.each($scope.player.items, function(item) {
+        if (item.name == 'Rehab')
+          new_items.push(item);
+      })
+      $scope.player.items = new_items;
     }
 
-    $scope.applyToJob = function () {
+    $scope.applyToJob = function() {
       if (_.random(0.01, 1.0) < ($scope.calcSuccessPercentageJob() + .05)) {
         enactSuccessfulJobApplication();
       } else {
@@ -215,7 +222,7 @@ angular.module('monsterApp')
       return (successPercent / 2) + (violencePercent * (successPercent / 2));
     }
 
-    $scope.calcSuccessPercentageJob = function () {
+    $scope.calcSuccessPercentageJob = function() {
       if ($scope.selected.fired) return 0;
       var dishonestyPercent = ($scope.player.dishonesty / 100);
       return ($scope.selected.jobSuccessPercentage / 2) + (dishonestyPercent * ($scope.selected.jobSuccessPercentage / 2));
@@ -269,8 +276,8 @@ angular.module('monsterApp')
       // if (square.type == "Road") {
       //   return 1
       // } else {
-        // return (.9 - square.baseSuccessPercentage/4);
-        // return 1;
+      // return (.9 - square.baseSuccessPercentage/4);
+      // return 1;
       // }
     }
 
@@ -339,6 +346,13 @@ angular.module('monsterApp')
         reason: _.sample(reasons),
         possibleJailtime: _.random(1, 6)
       }
+    }
+
+    $scope.itemImageName = function(name) {
+      var name_arr = name.split(" ")
+      return _.map(name_arr, function(name) {
+        return name.toLowerCase()
+      }).join("-") + ".png"
     }
 
     // CALL INIT

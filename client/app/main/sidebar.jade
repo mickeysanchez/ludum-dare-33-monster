@@ -1,26 +1,33 @@
 div.sidebar
     div.player-stats
       div.question-mark ?
-        table.info 
-          tr 
-            td.bold Cash: 
+        table.info
+          tr
+            td.bold Cash:
             td Use cash to buy new items to upgrade your abilities.
           tr
             td.bold Night & Age:
             td How many nights you've played and how old your character is.
-          tr 
-            td.bold Heat: 
+          tr
+            td.bold Heat:
             td How much the police want to catch you (which makes you more stressed).
+          tr
+            td.bold Items:
+            td Click on the store on the top left to buy items that will help you.
       p
         span.money Cash: ${{ player.money }}
-      p.day 
+      p.day
         span Night: {{ player.day }}
-      p.age 
+      p.age
         span Age: {{ 18 + player.day / 365 | number:0}}
-      p.heat 
+      p.heat
         span Heat: {{ player.heat | number:0 }}
-      p.items(ng-show="player.items.length > 0") Inventory:
-        span(ng-repeat="item in player.items track by $index")  -{{ item.name }}-
+    div.items
+      span.label Items:
+      span.italic.label(ng-hide="player.items.length > 0") None
+      span.image(ng-repeat="item in player.items" )
+        img(ng-src="{{ '/assets/images/' + itemImageName(item.name) }}")
+        span.item-name {{item.name}}
 
     div.selected-stats
       h3 Property Info:
@@ -35,7 +42,7 @@ div.sidebar
         h2.red(ng-if="selected.onAlert") ON ALERT FROM NEARBY VIOLENCE
         h2.red(ng-if="selected.fired") FIRED
         h2.red(ng-if="selected.failedApplication") FAILED JOB APPLICATION
-        
+
         img.thumbnail(ng-src="{{selected.thumbnail}}")
 
         div.stats
@@ -54,11 +61,11 @@ div.sidebar
 
         div.actions
           md-button.md-primary.md-raised.rob-this-property(ng-disabled="selected.fired || selected.failedApplication" md-no-ink type="button" ng-show="selected.type == 'Commercial' && !selected.employedHere" ng-click="applyForJob()")
-            span Apply For Job 
+            span Apply For Job
           md-button.md-primary.md-raised.rob-this-property(md-no-ink type="button" ng-show="selected.type == 'Commercial' && selected.employedHere" ng-click="work()")
             span Work
 
-          md-button.md-warn.md-raised.rob-this-property(md-no-ink type="button" ng-click="startRobbing()") 
+          md-button.md-warn.md-raised.rob-this-property(md-no-ink type="button" ng-click="startRobbing()")
             span(ng-show="selected.type == 'Residential' || selected.type == 'Commercial'") Rob this property
             span(ng-show="selected.type == 'Park'") Mug passerby
             span(ng-show="selected.type == 'Road'") Attempt Carjacking
