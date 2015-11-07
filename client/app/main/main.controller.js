@@ -23,6 +23,7 @@ angular.module('monsterApp')
         return item.price
       });
       $scope.preGame = true;
+      $scope.resetSettings();
       // createjs.Sound.registerSound("assets/music/monster.mp3", "music");
     }
 
@@ -316,7 +317,10 @@ angular.module('monsterApp')
           var phrases = ["Filled with adrenaline from last night's success", "Trying to forget past violence", "Trying to relax after last night's job", "Feeling on top of the world", "Feeling like nothing bad will every happen to you again", "Stressed out from, well... you know", "Feeling especially paranoid about getting caught"]
           var reasons = ["you meet up with some prison buddies for a good time. They convince you to pay for everything", "you get a motel room and hole up", "you go to the casino", "you go to a bar", "you spend the whole day in a bar", "you look for drugs"]
           var spends = ["on drugs", "on drinks", "on random shit you can't even remember", "gambling", "on a motel room"]
-          var randomCashSpend = Math.ceil(_.random($scope.player.money * MIN_RAND_EVENT_SPEND_PERCENT, $scope.player.money * MAX_RAND_EVENT_SPEND_PERCENT));;
+          var randomCashSpend = Math.ceil(_.random($scope.player.money * MIN_RAND_EVENT_SPEND_PERCENT, $scope.player.money * MAX_RAND_EVENT_SPEND_PERCENT));
+          randomCashSpend += Math.ceil(($scope.player.heat + 1) / _.random(1, 10))
+          if (randomCashSpend > $scope.player.money)
+            randomCashSpend = $scope.player.money
           return {
             phrase: _.sample(phrases),
             reason: _.sample(reasons),
@@ -357,6 +361,19 @@ angular.module('monsterApp')
       return _.map(name_arr, function(name) {
         return name.toLowerCase()
       }).join("-") + ".png"
+    }
+
+    $scope.settingsToggle = function() {
+      $scope.settingsOpen = !$scope.settingsOpen;
+    }
+
+    $scope.resetSettings = function() {
+      // SETTINGS:
+      $scope.difficulty = 50;
+      $scope.degreeOfPunish = 50;
+      $scope.discipline = 50;
+      $scope.violenceEffectiveness = 50;
+      $scope.effectsOfStress = 50;
     }
 
     // CALL INIT

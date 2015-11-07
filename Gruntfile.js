@@ -245,7 +245,7 @@ module.exports = function(grunt) {
           src: [
             '<%= yeoman.dist %>/public/{,*/}*.js',
             '<%= yeoman.dist %>/public/{,*/}*.css',
-            '<%= yeoman.dist %>/public/assets/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+            //'<%= yeoman.dist %>/public/assets/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
             '<%= yeoman.dist %>/public/assets/fonts/*'
           ]
         }
@@ -387,6 +387,13 @@ module.exports = function(grunt) {
         cwd: '<%= yeoman.client %>',
         dest: '.tmp/',
         src: ['{app,components}/**/*.css']
+      },
+      electron: {
+        cwd: 'electron',
+        dest: 'dist/public/',
+        src: ['*'],
+        flatten: true,
+        expand: true
       }
     },
 
@@ -673,7 +680,7 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('build', [
-  'clean:dist',
+    'clean:dist',
     'injector:sass',
     'concurrent:dist',
     'injector',
@@ -688,12 +695,13 @@ module.exports = function(grunt) {
     'cssmin',
     'uglify',
     'rev',
-    'usemin'
+    'usemin',
+    'copy:electron'
   ]);
 
   grunt.registerTask('default', [
     //'newer:jshint',
-    'test',
+    //'test',
     'build'
   ]);
 };

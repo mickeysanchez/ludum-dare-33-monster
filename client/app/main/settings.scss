@@ -1,0 +1,26 @@
+.settings {
+  position: fixed;
+  height: 20px;
+  width: 100px;
+  background: #363636;
+  color: #fafafa;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  padding: 5px;
+  z-index: 10;
+  outline: none;
+  -webkit-transition: height .3s;
+  transition: height .3s;
+
+  &:hover {
+    height: 25px;
+    cursor: pointer;
+  }
+}
+
+.settings-panel {
+  .question-mark {
+    margin: 0 10px;
+  }
+}

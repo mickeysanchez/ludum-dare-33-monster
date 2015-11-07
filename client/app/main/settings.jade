@@ -1,0 +1,47 @@
+div.settings(ng-click="settingsToggle()") SETTINGS
+
+div.robbing.settings-panel(ng-show="settingsOpen")
+  div.white
+    div.violence
+      h3.inline Difficulty of robbing:
+      div.question-mark ?
+        table.info
+            td How hard is it to rob someplace after all?
+      span {{ difficulty }}%
+      md-slider(aria-label="violence slider" flex min="0" max="100" ng-model="difficulty")
+
+    div.violence
+      h3.inline Degree of punishment:
+      div.question-mark ?
+        table.info
+            td For how long are they going to put you away?
+      span {{ degreeOfPunish }}%
+      md-slider(aria-label="violence slider" flex min="0" max="100" ng-model="degreeOfPunish")
+
+    div.violence
+      h3.inline Discipline:
+      div.question-mark ?
+        table.info
+            td How good are you at saving your money?
+      span {{ discipline }}%
+      md-slider(aria-label="violence slider" flex min="0" max="100" ng-model="discipline")
+
+    div.violence
+      h3.inline Effectiveness of violence:
+      div.question-mark ?
+        table.info
+            td How much the use of violence leads to a "successful" robbery, the idea being that someone willing to commit violence more readily would have a better chance of getting away with it (in the short term).
+      span {{ violenceEffectiveness }}%
+      md-slider(aria-label="violence slider" flex min="0" max="100" ng-model="violenceEffectiveness")
+
+    div.violence
+      h3.inline Effects of "heat":
+      div.question-mark ?
+        table.info
+            td How much "heat" effects your post robbery decisions and sentencing.
+      span {{ effectsOfStress }}%
+      md-slider(aria-label="violence slider" flex min="0" max="100" ng-model="effectsOfStress")
+
+    div.actions
+      md-button.md-primary(type="button" ng-click="resetSettings()") Reset Default
+      md-button.md-primary.md-raised(type="button" ng-click="settingsToggle()") Ok

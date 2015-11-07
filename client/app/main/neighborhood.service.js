@@ -9,7 +9,7 @@ angular.module('monsterApp')
     function createSquare(x, y) {
       var type = createType(x, y);
       var subtype = createSubType(type);
-      var thumbnail = '/assets/images/' + assignThumbnail(type, subtype);
+      var thumbnail = 'assets/images/' + assignThumbnail(type, subtype);
       var name = createName(type, subtype);
       var maximumPayoff = determineMaxPayoff(type, x, y);
       var baseSuccessPercentage = determineSuccessPercentage(type, maximumPayoff, x, y);
@@ -124,7 +124,7 @@ angular.module('monsterApp')
       // if (type == "Road") {
       //   return 0;
       // } else {
-        return _.random(MIN_POSSIBLE_PAYOFF, MAX_POSSIBLE_PAYOFF);
+      return _.random(MIN_POSSIBLE_PAYOFF, MAX_POSSIBLE_PAYOFF);
       // }
     }
 
@@ -132,8 +132,8 @@ angular.module('monsterApp')
       // if (type == "Road") {
       //   return 0;
       // } else {
-        var percentPayoff = maximumPayoff / MAX_POSSIBLE_PAYOFF
-        return 1 - percentPayoff;
+      var percentPayoff = maximumPayoff / MAX_POSSIBLE_PAYOFF
+      return 1 - percentPayoff;
       // }
     }
 
@@ -151,11 +151,11 @@ angular.module('monsterApp')
       return grid;
     }
 
-    var determineJobSuccess = function (baseSuccessPercentage) {
-      return baseSuccessPercentage/10;
+    var determineJobSuccess = function(baseSuccessPercentage) {
+      return baseSuccessPercentage / 10;
     }
 
-    var determineJobPay = function (jobSuccessPercentage) {
+    var determineJobPay = function(jobSuccessPercentage) {
       var pay = 100 * jobSuccessPercentage + _.random(0, 10);
       pay = (pay < 8) ? 8 : pay;
       pay = (pay > 20) ? 20 : pay;

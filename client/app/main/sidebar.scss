@@ -1,4 +1,45 @@
 .game {
+  .inline {
+    display: inline;
+  }
+
+  .question-mark {
+    display: inline-block;
+    position: relative;
+    background: $black;
+    color: white;
+    border: 1px solid white;
+    padding: 0px 4px 1px 4px;
+
+    .info {
+      position: absolute;
+      text-align: left;
+      top: 0;
+      left: 0;
+      background: white;
+      border: 3px solid $black;
+      color: black;
+      width: 250px;
+      z-index: 25;
+      display: none;
+
+      tr {
+
+        td {
+          cursor: default;
+          border: 2px solid $black;
+          padding: 5px;
+        }
+      }
+    }
+  }
+
+  .question-mark:hover {
+    .info {
+      display: block;
+    }
+  }
+
   .sidebar {
     background: $white;
     position: fixed;
@@ -17,37 +58,6 @@
       position: absolute;
       top: 5px;
       left: 5px;
-      color: white;
-      border: 1px solid white;
-      padding: 0px 4px 1px 4px;
-
-      .info {
-        position: absolute;
-        text-align: left;
-        top: 0;
-        left: 0;
-        background: white;
-        border: 3px solid $black;
-        color: black;
-        width: 250px;
-        z-index: 25;
-        display: none;
-
-        tr {
-
-          td {
-            cursor: default;
-            border: 2px solid $black;
-            padding: 5px;
-          }
-        }
-      }
-    }
-
-    .question-mark:hover {
-      .info {
-        display: block;
-      }
     }
 
     .player-stats {

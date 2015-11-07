@@ -26,7 +26,7 @@ div.sidebar
       span.label Items:
       span.italic.label(ng-hide="player.items.length > 0") None
       span.image(ng-repeat="item in player.items" )
-        img(ng-src="{{ '/assets/images/' + itemImageName(item.name) }}")
+        img(ng-src="{{ 'assets/images/' + itemImageName(item.name) }}")
         span.item-name {{item.name}}
 
     div.selected-stats

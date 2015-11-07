@@ -2,7 +2,7 @@ div.post-robbing(ng-if="courtHearing")
     div.white
       div(ng-if="lastRobbery.guilty")
         h3 Guilty.
-        img.jail(src="/assets/images/jail.png")
+        img.jail(src="assets/images/jail.png")
         p They found you guilty on all counts.
         p They send you to jail for
           span.money-negative  {{ lastRobbery.randomEvent.possibleJailtime }} years.
