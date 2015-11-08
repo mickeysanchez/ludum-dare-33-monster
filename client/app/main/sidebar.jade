@@ -54,7 +54,7 @@ div.sidebar
             p.stat {{ selected.info.name }}
           div.percentage
             p.label Chance for success:
-            p.stat {{ selected.baseSuccessPercentage + player.successModifier() | rounded }}%
+            p.stat {{ calcSuccessPercentage() | rounded }}%
           div.payoff
             p.label Possible Payoff:
             p.stat ${{ selected.maximumPayoff }}

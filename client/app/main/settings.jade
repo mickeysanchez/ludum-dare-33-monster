@@ -8,7 +8,15 @@ div.robbing.settings-panel(ng-show="settingsOpen")
         table.info
             td How hard is it to rob someplace after all?
       span {{ difficulty }}%
-      md-slider(aria-label="violence slider" flex min="0" max="100" ng-model="difficulty")
+      md-slider(aria-label="violence slider" flex min="1" max="200" ng-model="difficulty")
+
+    div.violence
+      h3.inline Payoff:
+      div.question-mark ?
+        table.info
+            td How much money do you get from robberies?
+      span {{ payoffModifier }}%
+      md-slider(aria-label="violence slider" flex min="1" max="200" ng-model="payoffModifier")
 
     div.violence
       h3.inline Degree of punishment:
@@ -16,7 +24,7 @@ div.robbing.settings-panel(ng-show="settingsOpen")
         table.info
             td For how long are they going to put you away?
       span {{ degreeOfPunish }}%
-      md-slider(aria-label="violence slider" flex min="0" max="100" ng-model="degreeOfPunish")
+      md-slider(aria-label="violence slider" flex min="1" max="200" ng-model="degreeOfPunish")
 
     div.violence
       h3.inline Discipline:
@@ -24,7 +32,7 @@ div.robbing.settings-panel(ng-show="settingsOpen")
         table.info
             td How good are you at saving your money?
       span {{ discipline }}%
-      md-slider(aria-label="violence slider" flex min="0" max="100" ng-model="discipline")
+      md-slider(aria-label="violence slider" flex min="1" max="200" ng-model="discipline")
 
     div.violence
       h3.inline Effectiveness of violence:
@@ -32,7 +40,7 @@ div.robbing.settings-panel(ng-show="settingsOpen")
         table.info
             td How much the use of violence leads to a "successful" robbery, the idea being that someone willing to commit violence more readily would have a better chance of getting away with it (in the short term).
       span {{ violenceEffectiveness }}%
-      md-slider(aria-label="violence slider" flex min="0" max="100" ng-model="violenceEffectiveness")
+      md-slider(aria-label="violence slider" flex min="1" max="200" ng-model="violenceEffectiveness")
 
     div.violence
       h3.inline Effects of "heat":
@@ -40,7 +48,7 @@ div.robbing.settings-panel(ng-show="settingsOpen")
         table.info
             td How much "heat" effects your post robbery decisions and sentencing.
       span {{ effectsOfStress }}%
-      md-slider(aria-label="violence slider" flex min="0" max="100" ng-model="effectsOfStress")
+      md-slider(aria-label="violence slider" flex min="1" max="200" ng-model="effectsOfStress")
 
     div.actions
       md-button.md-primary(type="button" ng-click="resetSettings()") Reset Default

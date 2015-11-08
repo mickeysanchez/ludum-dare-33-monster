@@ -1,5 +1,5 @@
 var MIN_POSSIBLE_PAYOFF = 0;
-var MAX_POSSIBLE_PAYOFF = 1000;
+var MAX_POSSIBLE_PAYOFF = 1500;
 
 angular.module('monsterApp')
   .factory('GridMaker', function() {

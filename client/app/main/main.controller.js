@@ -220,9 +220,14 @@ angular.module('monsterApp')
     }
 
     $scope.calcSuccessPercentage = function() {
-      var violencePercent = ($scope.player.violence / 100);
-      var successPercent = $scope.selected.baseSuccessPercentage + $scope.player.successModifier();
-      return (successPercent / 2) + (violencePercent * (successPercent / 2));
+      if ($scope.selected) {
+        var violencePercent = ($scope.player.violence / 100);
+        var successPercent = $scope.selected.baseSuccessPercentage + $scope.player.successModifier();
+        successPercent = (successPercent / 2) + (violencePercent * (successPercent / 2));
+        successPercent = successPercent * $scope.modifier($scope.violenceEffectiveness)
+        successPercent = successPercent / $scope.modifier($scope.difficulty)
+        return successPercent;
+      }
     }
 
     $scope.calcSuccessPercentageJob = function() {
@@ -239,8 +244,9 @@ angular.module('monsterApp')
       payoff = $scope.getAwayDriver(payoff)
       payoff = Math.round(payoff);
       payoff = (payoff > $scope.selected.maximumPayoff) ? $scope.selected.maximumPayoff : payoff;
+      payoff = payoff * $scope.modifier($scope.payoffModifier)
       $scope.lastRobbery.payoff = payoff;
-      return payoff;
+      return Math.ceil(payoff);
     }
 
     $scope.getAwayDriver = function(payoff) {
@@ -318,14 +324,16 @@ angular.module('monsterApp')
           var reasons = ["you meet up with some prison buddies for a good time. They convince you to pay for everything", "you get a motel room and hole up", "you go to the casino", "you go to a bar", "you spend the whole day in a bar", "you look for drugs"]
           var spends = ["on drugs", "on drinks", "on random shit you can't even remember", "gambling", "on a motel room"]
           var randomCashSpend = Math.ceil(_.random($scope.player.money * MIN_RAND_EVENT_SPEND_PERCENT, $scope.player.money * MAX_RAND_EVENT_SPEND_PERCENT));
-          randomCashSpend += Math.ceil(($scope.player.heat + 1) / _.random(1, 10))
+          var heat = $scope.player.heat * $scope.modifier($scope.effectsOfStress)
+          randomCashSpend += (heat + 1) / _.random(1, 10)
+          randomCashSpend = randomCashSpend / $scope.modifier($scope.discipline)
           if (randomCashSpend > $scope.player.money)
             randomCashSpend = $scope.player.money
           return {
             phrase: _.sample(phrases),
             reason: _.sample(reasons),
             spentOn: _.sample(spends),
-            randomCashSpend: randomCashSpend
+            randomCashSpend: Math.ceil(randomCashSpend)
           }
         } else {
           return {
@@ -352,7 +360,7 @@ angular.module('monsterApp')
 
       return {
         reason: _.sample(reasons),
-        possibleJailtime: _.random(1, 6)
+        possibleJailtime: Math.ceil(_.random(1, 20) * $scope.modifier($scope.degreeOfPunish))
       }
     }
 
@@ -369,11 +377,16 @@ angular.module('monsterApp')
 
     $scope.resetSettings = function() {
       // SETTINGS:
-      $scope.difficulty = 50;
-      $scope.degreeOfPunish = 50;
-      $scope.discipline = 50;
-      $scope.violenceEffectiveness = 50;
-      $scope.effectsOfStress = 50;
+      $scope.difficulty = 100;
+      $scope.payoffModifier = 100;
+      $scope.degreeOfPunish = 100;
+      $scope.discipline = 100;
+      $scope.violenceEffectiveness = 100;
+      $scope.effectsOfStress = 100;
+    }
+
+    $scope.modifier = function(setting) {
+      return (setting + 0.1) / 100;
     }
 
     // CALL INIT
