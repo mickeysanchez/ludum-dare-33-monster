@@ -9,7 +9,7 @@ angular.module('monsterApp', [
   ])
   .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider
-      .otherwise('/');
+      .otherwise('/beastiswithinyou');
 
-    // $locationProvider.html5Mode(true);
+    $locationProvider.html5Mode(true);
   });

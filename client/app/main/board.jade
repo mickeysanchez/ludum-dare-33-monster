@@ -1,4 +1,4 @@
-div.board
+div.board(ng-class="{scrolled: scrolled}")
     div.row(ng-repeat="row in grid")
       div.square(ng-repeat="square in row" ng-click="select(square)" ng-class="{selected: square == selected, residential: square.type == 'Residential', park: square.type == 'Park', commercial: square.type == 'Commercial', road: square.type == 'Road', 'road-horiz': square.type == 'Road' && square.surrounding.below != 'Road' && square.surrounding.above != 'Road', 'road-vert': square.type == 'Road' && square.surrounding.right != 'Road' && square.surrounding.left != 'Road', 'road-cross': square.type == 'Road' && (square.surrounding.below == 'Road' || square.surrounding.above == 'Road') && (square.surrounding.right == 'Road' || square.surrounding.left == 'Road'), robbed: square.robbed || square.fired || square.failedApplication, 'on-alert': square.onAlert, employed: square.employedHere}")
 

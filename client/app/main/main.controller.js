@@ -10,7 +10,7 @@ var MAX_RAND_EVENT_SPEND_PERCENT = .3; // Maximum percent of total money spent o
 
 
 angular.module('monsterApp')
-  .controller('MainCtrl', function($scope, $http, GridMaker, $mdDialog, Items, Player) {
+  .controller('MainCtrl', function($scope, $http, GridMaker, $mdDialog, Items, Player, $sce) {
     $scope.init = function() {
       $scope.numSquares = MAP_SIZE;
       $scope.robbing = false;
@@ -143,7 +143,8 @@ angular.module('monsterApp')
     }
 
     $scope.applyToJob = function() {
-      if (_.random(0.01, 1.0) < ($scope.calcSuccessPercentageJob() + .05)) {
+      // if (_.random(0.01, 1.0) < ($scope.calcSuccessPercentageJob() + .05)) {
+        if (true) {
         enactSuccessfulJobApplication();
       } else {
         enactFailedJobApplication();
@@ -389,6 +390,25 @@ angular.module('monsterApp')
       return (setting + 0.1) / 100;
     }
 
+    $scope.scrollText = "Scroll Down"
+    $scope.scrolled = false;
+    $scope.scroll = function () {
+      $scope.scrolled = !$scope.scrolled;
+
+      if ($scope.scrolled) {
+        $scope.scrollText = "Scroll Up"
+      } else {
+        $scope.scrollText = "Scroll Down"
+      }
+    }   
+
     // CALL INIT
     $scope.init();
+  })
+
+  .filter('html',function($sce){
+      return function(input){
+        console.log('here')
+          return $sce.trustAsHtml(input);
+      }
   });

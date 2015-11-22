@@ -4,7 +4,7 @@ angular.module('monsterApp')
   .config(function($stateProvider) {
     $stateProvider
       .state('main', {
-        url: '/',
+        url: '/beastiswithinyou',
         templateUrl: 'app/main/main.html',
         controller: 'MainCtrl'
       });

@@ -1,5 +1,5 @@
-.settings {
-  position: fixed;
+.settings, .scroller {
+  position: absolute;
   height: 20px;
   width: 100px;
   background: #363636;
@@ -23,4 +23,11 @@
   .question-mark {
     margin: 0 10px;
   }
+}
+
+.scroller {
+  left: inherit;
+  right: 0;
+  z-index: 9;
+  width: 150px;
 }
