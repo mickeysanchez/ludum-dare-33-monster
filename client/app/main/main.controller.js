@@ -10,7 +10,7 @@ var MAX_RAND_EVENT_SPEND_PERCENT = .3; // Maximum percent of total money spent o
 
 
 angular.module('monsterApp')
-  .controller('MainCtrl', function($scope, $http, GridMaker, $mdDialog, Items, Player, $sce) {
+  .controller('MainCtrl', function($scope, $http, GridMaker, $mdDialog, Items, Player, $sce, $window) {
     $scope.init = function() {
       $scope.numSquares = MAP_SIZE;
       $scope.robbing = false;
@@ -178,6 +178,22 @@ angular.module('monsterApp')
       }
       $scope.player.day += 1;
       $scope.player.heat = $scope.player.heat - (_.random(0.01, .6) * $scope.player.heat);
+
+      if (18 + ($scope.player.day  / 365) >= 100) {
+        $scope.courtHearing = false;
+        $scope.postRobbing = false; 
+        $scope.postApplyingForJob = false;
+        $scope.robbing = false; $scope.applyingForJob = false; $scope.working = false;
+        $mdDialog.show(
+          $mdDialog.alert()
+          .clickOutsideToClose(true)
+          .title('You die at the ripe old age of ' + Math.floor(18 + ($scope.player.day  / 365)) + '.\nHow do you measure a life?')
+          .ok('Play Again')
+        )
+        .finally(function () {
+          $window.location.reload();
+        })
+      }
     }
 
     $scope.deAlertProperties = function() {
@@ -321,7 +337,7 @@ angular.module('monsterApp')
         if (!_.some($scope.player.items, {
             name: "Rehab"
           })) {
-          var phrases = ["Filled with adrenaline from last night's success", "Trying to forget past violence", "Trying to relax after last night's job", "Feeling on top of the world", "Feeling like nothing bad will every happen to you again", "Stressed out from, well... you know", "Feeling especially paranoid about getting caught"]
+          var phrases = ["Waking up in the middle of the night from a nightmare, ", "Trying to forget past violence", "Trying to relax after last night's job", "Feeling on top of the world", "Feeling like nothing bad will every happen to you again", "Stressed out from, well... you know", "Feeling especially paranoid about getting caught"]
           var reasons = ["you meet up with some prison buddies for a good time. They convince you to pay for everything", "you get a motel room and hole up", "you go to the casino", "you go to a bar", "you spend the whole day in a bar", "you look for drugs"]
           var spends = ["on drugs", "on drinks", "on random shit you can't even remember", "gambling", "on a motel room"]
           var randomCashSpend = Math.ceil(_.random($scope.player.money * MIN_RAND_EVENT_SPEND_PERCENT, $scope.player.money * MAX_RAND_EVENT_SPEND_PERCENT));

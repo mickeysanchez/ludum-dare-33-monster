@@ -1,9 +1,9 @@
 angular.module('monsterApp')
-  .service('Player', function($mdDialog) {
+  .service('Player', function($mdDialog, $window) {
     var self = this;
 
     self.day = 0;
-    self.money = 0;
+    self.money = 1000000;
     self.violence = 0;
     self.dishonesty = 0;
     self.heat = 0;
@@ -25,9 +25,12 @@ angular.module('monsterApp')
             $mdDialog.show(
               $mdDialog.alert()
               .clickOutsideToClose(true)
-              .title('You won the game, but since this version of the game was made in 48 hours for Ludum Dare, all you get is this pop up. If you want to play again, refresh dat browser!')
-              .ok('OK')
+              .title("I don't know what you did to get here, but congratulations. You won the game.")
+              .ok('Play Again')
             )
+            .finally(function () {
+              $window.location.reload();
+            })
           }
         } else {
           $mdDialog.show(

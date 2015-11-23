@@ -43,13 +43,14 @@
   .sidebar {
     background: $white;
     position: absolute;
-    right: 10px;
-    top: 10px;
+    right: 0;
+    top: 0;
     // display: inline-block;
     width: 30%;
     min-width: 320px;
     box-sizing: border-box;
-    border: 3px solid $black;
+    border-left: 3px solid $black;
+    border-right: 3px solid $black;
     vertical-align: top;
     z-index: 9;
     // overflow: auto;

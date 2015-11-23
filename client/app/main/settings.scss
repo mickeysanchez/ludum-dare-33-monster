@@ -30,4 +30,9 @@
   right: 0;
   z-index: 9;
   width: 150px;
+
+  span {
+    display: inline-block;
+    margin-top: 2px;
+  }
 }

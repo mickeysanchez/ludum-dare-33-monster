@@ -17,7 +17,9 @@ div.game
 
   include settings.jade
 
-  div.scroller(ng-click="scroll()") {{ scrollText }}
+  div.scroller(ng-click="scroll()")
+    span(ng-hide="scrolled") &#x2193; &#x2193; &#x2193; &#x2193;
+    span(ng-show="scrolled") &#x2191; &#x2191; &#x2191; &#x2191;
 
 
 
