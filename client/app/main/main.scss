@@ -9,20 +9,24 @@ html {
 
     .container {
       position: absolute;
-      width: 1200px;
-      height: 800px;
+      width: 100%;
+      min-width: 800px;
+      max-width: 1200px;
+      height: 100%;
+      min-height: 600px;
+      max-height: 800px;
       top: 50%;
       left: 50%;
-      margin-left: -600px;
-      margin-top: -400px;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
       overflow: hidden;
       border: 6px solid #282828;
       background: white;
       position: relative;
 
       .game {
-        width: 1200px;
-        height: 800px;
+        width: 100%;
+        height: 100%;
         position: relative;
 
         .md-button.md-warn.md-raised {
