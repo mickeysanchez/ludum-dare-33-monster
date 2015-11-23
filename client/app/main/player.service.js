@@ -3,7 +3,7 @@ angular.module('monsterApp')
     var self = this;
 
     self.day = 0;
-    self.money = 1000000;
+    self.money = 0;
     self.violence = 0;
     self.dishonesty = 0;
     self.heat = 0;
