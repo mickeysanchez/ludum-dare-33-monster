@@ -1,27 +1,24 @@
-div.game
-  include pre-game-overlay.jade
+div.container
+  div.game(ng-controller="MainCtrl")
+    include pre-game-overlay.jade
 
-  include robbing-overlay.jade
+    include robbing-overlay.jade
 
-  include post-robbing-overlay.jade
+    include post-robbing-overlay.jade
 
-  include rand-events.jade
+    include rand-events.jade
 
-  include court-hearing.jade
+    include court-hearing.jade
 
-  include board.jade
+    include board.jade
 
-  include sidebar.jade
+    include sidebar.jade
 
-  include store.jade
+    include store.jade
 
-  include settings.jade
+    include settings.jade
 
-  div.scroller(ng-click="scroll()")
-    span(ng-hide="scrolled") &#x2193; &#x2193; &#x2193; &#x2193;
-    span(ng-show="scrolled") &#x2191; &#x2191; &#x2191; &#x2191;
-
-
-
-
-
+    div.scroller(ng-click="scroll()")
+      span(ng-hide="scrolled") &#x2193; &#x2193; &#x2193; &#x2193;
+      span(ng-show="scrolled") &#x2191; &#x2191; &#x2191; &#x2191;
+      

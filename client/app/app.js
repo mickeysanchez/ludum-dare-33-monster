@@ -8,8 +8,5 @@ angular.module('monsterApp', [
     'ngMaterial'
   ])
   .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
-    $urlRouterProvider
-      .otherwise('/beastiswithinyou');
-
-    $locationProvider.html5Mode(true);
+    
   });

@@ -439,7 +439,7 @@ module.exports = function(grunt) {
         }
       },
       dist: [
-        'jade',
+        // 'jade',
         'sass',
         'imagemin',
         'svgmin'
@@ -486,19 +486,36 @@ module.exports = function(grunt) {
 
     // Compiles Jade to html
     jade: {
-      compile: {
+      // compile: {
+      //   options: {
+      //     data: {
+      //       debug: false
+      //     }
+      //   },
+      //   files: [{
+      //     expand: true,
+      //     cwd: '<%= yeoman.client %>',
+      //     src: [
+      //       '{app,components}/**/*.jade'
+      //     ],
+      //     dest: '.tmp',
+      //     ext: '.html'
+      //   }]
+      // },
+      index: {
         options: {
           data: {
             debug: false
-          }
+          },
+          pretty: true
         },
         files: [{
           expand: true,
           cwd: '<%= yeoman.client %>',
           src: [
-            '{app,components}/**/*.jade'
+            'index.jade'
           ],
-          dest: '.tmp',
+          dest: '<%= yeoman.client %>',
           ext: '.html'
         }]
       }
