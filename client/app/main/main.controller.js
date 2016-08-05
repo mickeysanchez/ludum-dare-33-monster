@@ -143,8 +143,7 @@ angular.module('monsterApp')
     }
 
     $scope.applyToJob = function() {
-      // if (_.random(0.01, 1.0) < ($scope.calcSuccessPercentageJob() + .05)) {
-        if (true) {
+      if (_.random(0.01, 1.0) < ($scope.calcSuccessPercentageJob() + .05)) {
         enactSuccessfulJobApplication();
       } else {
         enactFailedJobApplication();
@@ -179,20 +178,22 @@ angular.module('monsterApp')
       $scope.player.day += 1;
       $scope.player.heat = $scope.player.heat - (_.random(0.01, .6) * $scope.player.heat);
 
-      if (18 + ($scope.player.day  / 365) >= 100) {
+      if (18 + ($scope.player.day / 365) >= 100) {
         $scope.courtHearing = false;
-        $scope.postRobbing = false; 
+        $scope.postRobbing = false;
         $scope.postApplyingForJob = false;
-        $scope.robbing = false; $scope.applyingForJob = false; $scope.working = false;
+        $scope.robbing = false;
+        $scope.applyingForJob = false;
+        $scope.working = false;
         $mdDialog.show(
-          $mdDialog.alert()
-          .clickOutsideToClose(true)
-          .title('You die at the ripe old age of ' + Math.floor(18 + ($scope.player.day  / 365)) + '.\nHow do you measure a life?')
-          .ok('Play Again')
-        )
-        .finally(function () {
-          $window.location.reload();
-        })
+            $mdDialog.alert()
+            .clickOutsideToClose(true)
+            .title('You die at the ripe old age of ' + Math.floor(18 + ($scope.player.day / 365)) + '.\nHow do you measure a life?')
+            .ok('Play Again')
+          )
+          .finally(function() {
+            $window.location.reload();
+          })
       }
     }
 
@@ -408,7 +409,7 @@ angular.module('monsterApp')
 
     $scope.scrollText = "Scroll Down"
     $scope.scrolled = false;
-    $scope.scroll = function () {
+    $scope.scroll = function() {
       $scope.scrolled = !$scope.scrolled;
 
       if ($scope.scrolled) {
@@ -416,15 +417,15 @@ angular.module('monsterApp')
       } else {
         $scope.scrollText = "Scroll Down"
       }
-    }   
+    }
 
     // CALL INIT
     $scope.init();
   })
 
-  .filter('html',function($sce){
-      return function(input){
-        console.log('here')
-          return $sce.trustAsHtml(input);
-      }
-  });
+.filter('html', function($sce) {
+  return function(input) {
+    console.log('here')
+    return $sce.trustAsHtml(input);
+  }
+});
